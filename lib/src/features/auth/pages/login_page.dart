@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_chat/src/features/auth/widgets/email_field.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -25,59 +26,12 @@ class LoginPage extends StatelessWidget {
                 style: textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
               ),
               Image.asset('assets/illustration.png', width: 300),
-              const _EmailField(),
+              const EmailField(),
               const SizedBox(height: 14),
               const _PasswordField(),
               const SizedBox(height: 18),
               const _LoginButton(),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _EmailField extends StatelessWidget {
-  const _EmailField();
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.10),
-            blurRadius: 16,
-          ),
-        ],
-      ),
-      child: TextField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(vertical: 16),
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide.none,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide.none,
-          ),
-          prefixIcon: const Icon(Icons.mail_outline, color: Colors.black),
-          hintText: 'メールアドレス',
-          hintStyle: textTheme.bodyLarge?.copyWith(
-            color: Colors.grey,
-            fontWeight: FontWeight.w600,
           ),
         ),
       ),
