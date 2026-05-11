@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_chat/src/routing/app_router.dart';
+import 'package:riverpod_chat/src/theme/app_spacing.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});
@@ -13,6 +14,7 @@ class App extends ConsumerWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF3226A)),
+        extensions: const [AppSpacing.standard],
       ),
     );
   }
