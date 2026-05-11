@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_chat/src/features/auth/widgets/email_field.dart';
+import 'package:riverpod_chat/src/features/auth/widgets/password_field.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -28,61 +29,10 @@ class LoginPage extends StatelessWidget {
               Image.asset('assets/illustration.png', width: 300),
               const EmailField(),
               const SizedBox(height: 14),
-              const _PasswordField(),
+              const PasswordField(),
               const SizedBox(height: 18),
               const _LoginButton(),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _PasswordField extends StatelessWidget {
-  const _PasswordField();
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.10),
-            blurRadius: 16,
-          ),
-        ],
-      ),
-      child: TextField(
-        obscureText: true,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(vertical: 16),
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide.none,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide.none,
-          ),
-          prefixIcon: const Icon(Icons.lock_outline, color: Colors.black),
-          suffixIcon: const Icon(
-            Icons.visibility_outlined,
-            color: Colors.black,
-          ),
-          hintText: 'パスワード',
-          hintStyle: textTheme.bodyLarge?.copyWith(
-            color: Colors.grey,
-            fontWeight: FontWeight.w600,
           ),
         ),
       ),
