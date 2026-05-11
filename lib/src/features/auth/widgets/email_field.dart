@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class EmailField extends StatelessWidget {
   const EmailField({super.key});
@@ -6,6 +7,7 @@ class EmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final spacing = context.spacing;
 
     return Container(
       decoration: BoxDecoration(
@@ -20,7 +22,7 @@ class EmailField extends StatelessWidget {
       child: TextField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(vertical: 16),
+          contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(

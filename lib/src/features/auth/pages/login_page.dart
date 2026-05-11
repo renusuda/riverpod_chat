@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_chat/src/features/auth/widgets/email_field.dart';
 import 'package:riverpod_chat/src/features/auth/widgets/login_button.dart';
 import 'package:riverpod_chat/src/features/auth/widgets/password_field.dart';
+import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -9,11 +10,13 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final spacing = context.spacing;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
+          padding: EdgeInsets.symmetric(horizontal: spacing.p32),
           child: Column(
             children: [
               Image.asset('assets/app_title.png', width: 300),
@@ -29,9 +32,9 @@ class LoginPage extends StatelessWidget {
               ),
               Image.asset('assets/illustration.png', width: 300),
               const EmailField(),
-              const SizedBox(height: 14),
+              SizedBox(height: spacing.p16),
               const PasswordField(),
-              const SizedBox(height: 18),
+              SizedBox(height: spacing.p20),
               const LoginButton(),
             ],
           ),

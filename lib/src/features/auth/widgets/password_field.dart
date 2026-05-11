@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class PasswordField extends StatelessWidget {
   const PasswordField({super.key});
@@ -6,6 +7,7 @@ class PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final spacing = context.spacing;
 
     return Container(
       decoration: BoxDecoration(
@@ -20,7 +22,7 @@ class PasswordField extends StatelessWidget {
       child: TextField(
         obscureText: true,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(vertical: 16),
+          contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(
