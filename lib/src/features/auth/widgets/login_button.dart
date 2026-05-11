@@ -25,7 +25,7 @@ class LoginButton extends StatelessWidget {
         ),
         child: Text(
           'ログイン',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+          style: context.textTheme.titleMedium?.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
