@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class LoginButton extends StatelessWidget {
-  const LoginButton({super.key});
+  const LoginButton({required this.onPressed, super.key});
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class LoginButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFFF3226A),
           foregroundColor: Colors.white,

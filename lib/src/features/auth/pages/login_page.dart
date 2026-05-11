@@ -13,6 +13,8 @@ class LoginPage extends HookWidget {
     final textTheme = context.textTheme;
     final spacing = context.spacing;
 
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
     final formKey = useMemoized(() => GlobalKey<FormState>());
 
     return Scaffold(
@@ -39,11 +41,16 @@ class LoginPage extends HookWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      const EmailField(),
+                      EmailField(controller: emailController),
                       SizedBox(height: spacing.p16),
-                      const PasswordField(),
+                      PasswordField(controller: passwordController),
                       SizedBox(height: spacing.p20),
-                      const LoginButton(),
+                      LoginButton(
+                        onPressed: () {
+                          debugPrint(emailController.text);
+                          debugPrint(passwordController.text);
+                        },
+                      ),
                     ],
                   ),
                 ),

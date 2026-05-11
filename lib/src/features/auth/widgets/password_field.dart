@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class PasswordField extends StatelessWidget {
-  const PasswordField({super.key});
+  const PasswordField({required this.controller, super.key});
+
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class PasswordField extends StatelessWidget {
         ],
       ),
       child: TextField(
+        controller: controller,
         obscureText: true,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
