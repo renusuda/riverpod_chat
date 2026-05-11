@@ -13,7 +13,7 @@
 ## テスト
 
 - ユニットテストは `test/` に配置する
-- ユニットテストの実行: `flutter test`
+- ユニットテストの実行: `fvm flutter test`
 
 ## セキュリティ
 
@@ -27,26 +27,26 @@
 
 ```bash
 # 依存関係を取得
-flutter pub get
+fvm flutter pub get
 
 # パッケージを依存関係に追加
-flutter pub add <package>
+fvm flutter pub add <package>
 
 # パッケージを開発用の依存関係に追加
-flutter pub add dev:<package>
+fvm flutter pub add dev:<package>
 
 # アプリを起動
-flutter run
+fvm flutter run
 
 # ユニットテストの実施
-flutter test
+fvm flutter test
 
 # コードを静的解析
-flutter analyze
+fvm flutter analyze
 
 # コード生成の実行
-dart run build_runner build --delete-conflicting-outputs
+fvm dart run build_runner build --delete-conflicting-outputs
 
 # コードの変更があるたびに、コード生成の実行
-dart run build_runner watch -d
+fvm dart run build_runner watch -d
 ```
