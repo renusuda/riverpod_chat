@@ -11,7 +11,9 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       routerConfig: goRouter,
       title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF3226A)),
+      ),
     );
   }
 }
