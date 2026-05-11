@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:riverpod_chat/src/features/auth/widgets/email_field.dart';
 import 'package:riverpod_chat/src/features/auth/widgets/login_button.dart';
 import 'package:riverpod_chat/src/features/auth/widgets/password_field.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends HookWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
     final spacing = context.spacing;
+
+    final formKey = useMemoized(() => GlobalKey<FormState>());
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -32,11 +35,18 @@ class LoginPage extends StatelessWidget {
                   style: textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
                 ),
                 Image.asset('assets/illustration.png', width: 300),
-                const EmailField(),
-                SizedBox(height: spacing.p16),
-                const PasswordField(),
-                SizedBox(height: spacing.p20),
-                const LoginButton(),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      const EmailField(),
+                      SizedBox(height: spacing.p16),
+                      const PasswordField(),
+                      SizedBox(height: spacing.p20),
+                      const LoginButton(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
