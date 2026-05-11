@@ -9,6 +9,16 @@ part 'app_router.g.dart';
 @Riverpod(keepAlive: true)
 GoRouter goRouter(Ref ref) {
   return GoRouter(
+    redirect: (context, state) {
+      final isLoggedIn = false;
+      final path = state.uri.path;
+      if (!isLoggedIn) {
+        if (path == '/') {
+          return '/login';
+        }
+      }
+      return null;
+    },
     routes: [
       GoRoute(
         path: '/login',
