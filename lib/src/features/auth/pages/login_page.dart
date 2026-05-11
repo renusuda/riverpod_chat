@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_chat/src/features/auth/widgets/email_field.dart';
+import 'package:riverpod_chat/src/features/auth/widgets/login_button.dart';
 import 'package:riverpod_chat/src/features/auth/widgets/password_field.dart';
 
 class LoginPage extends StatelessWidget {
@@ -31,37 +32,8 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 14),
               const PasswordField(),
               const SizedBox(height: 18),
-              const _LoginButton(),
+              const LoginButton(),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _LoginButton extends StatelessWidget {
-  const _LoginButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFF3226A),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32),
-          ),
-          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-        ),
-        child: Text(
-          'ログイン',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
           ),
         ),
       ),
