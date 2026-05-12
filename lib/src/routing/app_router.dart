@@ -11,7 +11,7 @@ GoRouter goRouter(Ref ref) {
   return GoRouter(
     initialLocation: '/chats',
     redirect: (context, state) {
-      final isLoggedIn = false;
+      const isLoggedIn = false;
       final path = state.uri.path;
       if (!isLoggedIn) {
         if (path == '/chats') {
@@ -24,12 +24,12 @@ GoRouter goRouter(Ref ref) {
       GoRoute(
         path: '/login',
         name: AppRoute.login.name,
-        builder: (context, state) => LoginPage(),
+        builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
         path: '/chats',
         name: AppRoute.chats.name,
-        builder: (context, state) => ChatsPage(),
+        builder: (context, state) => const ChatsPage(),
       ),
     ],
   );

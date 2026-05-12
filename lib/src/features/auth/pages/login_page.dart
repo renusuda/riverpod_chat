@@ -15,7 +15,7 @@ class LoginPage extends HookWidget {
 
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final formKey = useMemoized(GlobalKey<FormState>.new);
 
     return Scaffold(
       backgroundColor: Colors.white,

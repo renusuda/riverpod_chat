@@ -21,7 +21,7 @@ class _ChatsPageState extends State<ChatsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Flutter Demo Home Page'),
+        title: const Text('Flutter Demo Home Page'),
       ),
       body: Center(
         child: Column(
