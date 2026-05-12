@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_chat/src/features/auth/presentation/providers/login_provider.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/widgets/email_field.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/widgets/login_button.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/widgets/password_field.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
-class LoginPage extends HookWidget {
+class LoginPage extends HookConsumerWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = context.textTheme;
     final spacing = context.spacing;
 
@@ -47,8 +49,12 @@ class LoginPage extends HookWidget {
                       SizedBox(height: spacing.p20),
                       LoginButton(
                         onPressed: () {
-                          debugPrint(emailController.text);
-                          debugPrint(passwordController.text);
+                          ref
+                              .read(loginProvider.notifier)
+                              .login(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              );
                         },
                       ),
                     ],
