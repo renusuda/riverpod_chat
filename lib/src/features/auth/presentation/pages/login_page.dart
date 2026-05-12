@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:riverpod_chat/src/features/auth/widgets/email_field.dart';
-import 'package:riverpod_chat/src/features/auth/widgets/login_button.dart';
-import 'package:riverpod_chat/src/features/auth/widgets/password_field.dart';
+import 'package:riverpod_chat/src/features/auth/presentation/widgets/email_field.dart';
+import 'package:riverpod_chat/src/features/auth/presentation/widgets/login_button.dart';
+import 'package:riverpod_chat/src/features/auth/presentation/widgets/password_field.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class LoginPage extends HookWidget {
