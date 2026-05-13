@@ -14,6 +14,9 @@ class App extends ConsumerWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF3226A)),
+        inputDecorationTheme: const InputDecorationTheme(
+          errorStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        ),
         extensions: const [AppSpacing.standard],
       ),
     );
