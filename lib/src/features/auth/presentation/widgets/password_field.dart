@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_chat/src/features/auth/domain/password.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class PasswordField extends StatelessWidget {
@@ -21,8 +22,9 @@ class PasswordField extends StatelessWidget {
           ),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
+        validator: Password.validate,
         obscureText: true,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
