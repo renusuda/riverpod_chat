@@ -12,7 +12,7 @@ part of 'login_provider.dart';
 @ProviderFor(Login)
 final loginProvider = LoginProvider._();
 
-final class LoginProvider extends $NotifierProvider<Login, void> {
+final class LoginProvider extends $AsyncNotifierProvider<Login, void> {
   LoginProvider._()
     : super(
         from: null,
@@ -30,29 +30,21 @@ final class LoginProvider extends $NotifierProvider<Login, void> {
   @$internal
   @override
   Login create() => Login();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(void value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<void>(value),
-    );
-  }
 }
 
-String _$loginHash() => r'4d990ce4914e612437ff11f58578d3c8bd4f5a7e';
+String _$loginHash() => r'80cd8a79d9fdc0d9d1c4064dfb09da13c75552f1';
 
-abstract class _$Login extends $Notifier<void> {
-  void build();
+abstract class _$Login extends $AsyncNotifier<void> {
+  FutureOr<void> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<void, void>;
+    final ref = this.ref as $Ref<AsyncValue<void>, void>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<void, void>,
-              void,
+              AnyNotifier<AsyncValue<void>, void>,
+              AsyncValue<void>,
               Object?,
               Object?
             >;
