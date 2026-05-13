@@ -9,6 +9,7 @@ class FakeAuthRemoteDataSource implements AuthRemoteDataSource {
     required String email,
     required String password,
   }) async {
+    await Future<void>.delayed(const Duration(seconds: 1));
     debugPrint(email);
     debugPrint(password);
   }
