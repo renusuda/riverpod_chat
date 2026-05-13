@@ -48,8 +48,8 @@ class LoginPage extends HookConsumerWidget {
                       PasswordField(controller: passwordController),
                       SizedBox(height: spacing.p20),
                       LoginButton(
-                        onPressed: () {
-                          ref
+                        onPressed: () async {
+                          await ref
                               .read(loginProvider.notifier)
                               .login(
                                 email: emailController.text,
