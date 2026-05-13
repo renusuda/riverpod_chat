@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class LoginButton extends StatelessWidget {
-  const LoginButton({required this.onPressed, super.key});
+  const LoginButton({
+    required this.onPressed,
+    required this.isLoading,
+    super.key,
+  });
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +31,20 @@ class LoginButton extends StatelessWidget {
             horizontal: spacing.p32,
           ),
         ),
-        child: Text(
-          'ログイン',
-          style: context.textTheme.titleMedium?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: isLoading
+            ? const SizedBox.square(
+                dimension: 24,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              )
+            : Text(
+                'ログイン',
+                style: context.textTheme.titleMedium?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
       ),
     );
   }
