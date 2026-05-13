@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_chat/src/features/auth/domain/email_address.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class EmailField extends StatelessWidget {
@@ -23,7 +24,7 @@ class EmailField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
-        validator: _validateEmail,
+        validator: EmailAddress.validate,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
@@ -50,15 +51,5 @@ class EmailField extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'メールアドレスを入力してください';
-    }
-    if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(value)) {
-      return '正しいメールアドレスを入力してください';
-    }
-    return null;
   }
 }
