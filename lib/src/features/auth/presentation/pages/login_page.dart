@@ -43,6 +43,7 @@ class LoginPage extends HookConsumerWidget {
                 Image.asset('assets/illustration.png', width: 300),
                 Form(
                   key: formKey,
+                  autovalidateMode: AutovalidateMode.onUnfocus,
                   child: Column(
                     children: [
                       EmailField(controller: emailController),
