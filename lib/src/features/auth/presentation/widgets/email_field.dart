@@ -3,9 +3,18 @@ import 'package:riverpod_chat/src/features/auth/domain/email_address.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class EmailField extends StatelessWidget {
-  const EmailField({required this.controller, super.key});
+  const EmailField({
+    required this.controller,
+    required this.textInputAction,
+    required this.onFieldSubmitted,
+    super.key,
+  });
 
   final TextEditingController controller;
+
+  final TextInputAction textInputAction;
+
+  final ValueChanged<String> onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +35,8 @@ class EmailField extends StatelessWidget {
         controller: controller,
         validator: EmailAddress.validate,
         keyboardType: TextInputType.emailAddress,
+        textInputAction: textInputAction,
+        onFieldSubmitted: onFieldSubmitted,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
           filled: true,

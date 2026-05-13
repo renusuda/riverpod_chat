@@ -3,9 +3,18 @@ import 'package:riverpod_chat/src/features/auth/domain/password.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class PasswordField extends StatelessWidget {
-  const PasswordField({required this.controller, super.key});
+  const PasswordField({
+    required this.controller,
+    required this.focusNode,
+    required this.textInputAction,
+    super.key,
+  });
 
   final TextEditingController controller;
+
+  final FocusNode focusNode;
+
+  final TextInputAction textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +33,10 @@ class PasswordField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
+        focusNode: focusNode,
         validator: Password.validate,
         obscureText: true,
+        textInputAction: textInputAction,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
           filled: true,

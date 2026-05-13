@@ -20,6 +20,7 @@ class LoginPage extends HookConsumerWidget {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final formKey = useMemoized(GlobalKey<FormState>.new);
+    final passwordFocusNode = useFocusNode();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -46,9 +47,19 @@ class LoginPage extends HookConsumerWidget {
                   autovalidateMode: AutovalidateMode.onUnfocus,
                   child: Column(
                     children: [
-                      EmailField(controller: emailController),
+                      EmailField(
+                        controller: emailController,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          passwordFocusNode.requestFocus();
+                        },
+                      ),
                       SizedBox(height: spacing.p16),
-                      PasswordField(controller: passwordController),
+                      PasswordField(
+                        controller: passwordController,
+                        focusNode: passwordFocusNode,
+                        textInputAction: TextInputAction.done,
+                      ),
                       SizedBox(height: spacing.p20),
                       LoginButton(
                         isLoading: loginState.isLoading,
