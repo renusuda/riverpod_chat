@@ -15,6 +15,8 @@ class LoginPage extends HookConsumerWidget {
     final textTheme = context.textTheme;
     final spacing = context.spacing;
 
+    final loginState = ref.watch(loginProvider);
+
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final formKey = useMemoized(GlobalKey<FormState>.new);
@@ -48,14 +50,17 @@ class LoginPage extends HookConsumerWidget {
                       PasswordField(controller: passwordController),
                       SizedBox(height: spacing.p20),
                       LoginButton(
-                        onPressed: () async {
-                          await ref
-                              .read(loginProvider.notifier)
-                              .login(
-                                email: emailController.text,
-                                password: passwordController.text,
-                              );
-                        },
+                        isLoading: loginState.isLoading,
+                        onPressed: loginState.isLoading
+                            ? null
+                            : () async {
+                                await ref
+                                    .read(loginProvider.notifier)
+                                    .login(
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    );
+                              },
                       ),
                     ],
                   ),
