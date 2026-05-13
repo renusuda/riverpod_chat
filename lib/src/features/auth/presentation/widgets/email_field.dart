@@ -21,8 +21,9 @@ class EmailField extends StatelessWidget {
           ),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
+        validator: _validateEmail,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
@@ -49,5 +50,12 @@ class EmailField extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'メールアドレスを入力してください';
+    }
+    return null;
   }
 }

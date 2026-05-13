@@ -54,6 +54,9 @@ class LoginPage extends HookConsumerWidget {
                         onPressed: loginState.isLoading
                             ? null
                             : () async {
+                                if (!formKey.currentState!.validate()) {
+                                  return;
+                                }
                                 await ref
                                     .read(loginProvider.notifier)
                                     .login(
