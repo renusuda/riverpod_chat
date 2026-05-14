@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_chat/src/exceptions/app_exception.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/providers/login_provider.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/widgets/email_field.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/widgets/login_button.dart';
+import 'package:riverpod_chat/src/features/auth/presentation/widgets/login_error_banner.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/widgets/password_field.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
@@ -21,6 +23,11 @@ class LoginPage extends HookConsumerWidget {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final passwordFocusNode = useFocusNode();
+    final loginErrorMessage = switch (loginState.error) {
+      AppException(:final message) => message,
+      _ when loginState.hasError => 'ログインに失敗しました。時間をおいて再度お試しください',
+      _ => null,
+    };
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -60,6 +67,10 @@ class LoginPage extends HookConsumerWidget {
                         focusNode: passwordFocusNode,
                         textInputAction: TextInputAction.done,
                       ),
+                      if (loginErrorMessage != null) ...[
+                        SizedBox(height: spacing.p16),
+                        LoginErrorBanner(message: loginErrorMessage),
+                      ],
                       SizedBox(height: spacing.p20),
                       LoginButton(
                         isLoading: loginState.isLoading,
