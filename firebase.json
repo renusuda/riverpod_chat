@@ -1,0 +1,30 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "riverpod-chat-b73fe",
+          "appId": "1:359447928245:android:d61aa7d5377417793f8dfc",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "riverpod-chat-b73fe",
+          "appId": "1:359447928245:ios:6016fe508edb14cf3f8dfc",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "riverpod-chat-b73fe",
+          "configurations": {
+            "android": "1:359447928245:android:d61aa7d5377417793f8dfc",
+            "ios": "1:359447928245:ios:6016fe508edb14cf3f8dfc"
+          }
+        }
+      }
+    }
+  }
+}
