@@ -34,6 +34,7 @@ spec.md
 .pub/
 /build/
 /coverage/
+lib/firebase_options.dart
 
 # Symbolication related
 app.*.symbols
