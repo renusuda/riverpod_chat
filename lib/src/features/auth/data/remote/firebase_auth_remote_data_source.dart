@@ -22,6 +22,11 @@ class FirebaseAuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
+  Future<void> logout() {
+    return _firebaseAuth.signOut();
+  }
+
+  @override
   AppUser? get currentUser => _firebaseAuth.currentUser?.toDomain();
 
   @override

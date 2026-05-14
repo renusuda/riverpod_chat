@@ -18,6 +18,10 @@ class AuthRepository {
     );
   }
 
+  Future<void> logout() {
+    return _remoteDataSource.logout();
+  }
+
   AppUser? get currentUser => _remoteDataSource.currentUser;
 
   Stream<AppUser?> authenticationStateChanges() {

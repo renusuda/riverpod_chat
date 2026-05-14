@@ -6,6 +6,8 @@ abstract interface class AuthRemoteDataSource {
     required String password,
   });
 
+  Future<void> logout();
+
   AppUser? get currentUser;
 
   Stream<AppUser?> authStateChanges();
