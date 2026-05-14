@@ -55,7 +55,7 @@ final class AuthRemoteDataSourceProvider
 }
 
 String _$authRemoteDataSourceHash() =>
-    r'6006dbaec7aecb7f15574039745fda387731aa2e';
+    r'f6db209630178cfa7683203626957636175aaae5';
 
 @ProviderFor(authRepository)
 final authRepositoryProvider = AuthRepositoryProvider._();

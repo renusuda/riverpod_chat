@@ -7,7 +7,7 @@ part 'auth_repository_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 AuthRemoteDataSource authRemoteDataSource(Ref ref) {
-  return const FakeAuthRemoteDataSource();
+  return FakeAuthRemoteDataSource();
 }
 
 @Riverpod(keepAlive: true)
