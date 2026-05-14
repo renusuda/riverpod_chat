@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:riverpod_chat/src/features/auth/domain/password.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
-class PasswordField extends StatelessWidget {
+class PasswordField extends HookWidget {
   const PasswordField({
     required this.controller,
     required this.focusNode,
@@ -21,6 +22,8 @@ class PasswordField extends StatelessWidget {
     final textTheme = context.textTheme;
     final spacing = context.spacing;
 
+    final obscureText = useState(true);
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
@@ -35,7 +38,7 @@ class PasswordField extends StatelessWidget {
         controller: controller,
         focusNode: focusNode,
         validator: Password.validate,
-        obscureText: true,
+        obscureText: obscureText.value,
         textInputAction: textInputAction,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
@@ -54,9 +57,14 @@ class PasswordField extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
           prefixIcon: const Icon(Icons.lock_outline, color: Colors.black),
-          suffixIcon: const Icon(
-            Icons.visibility_outlined,
-            color: Colors.black,
+          suffixIcon: IconButton(
+            onPressed: () => obscureText.value = !obscureText.value,
+            icon: Icon(
+              obscureText.value
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+              color: Colors.black,
+            ),
           ),
           hintText: 'パスワード',
           hintStyle: textTheme.bodyLarge?.copyWith(
