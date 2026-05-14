@@ -17,9 +17,9 @@ class LoginPage extends HookConsumerWidget {
 
     final loginState = ref.watch(loginProvider);
 
+    final formKey = useMemoized(GlobalKey<FormState>.new);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final formKey = useMemoized(GlobalKey<FormState>.new);
     final passwordFocusNode = useFocusNode();
 
     return Scaffold(
