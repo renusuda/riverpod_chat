@@ -16,6 +16,7 @@ class App extends ConsumerWidget {
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF3226A)),
         navigationBarTheme: NavigationBarThemeData(
+          backgroundColor: Colors.white,
           indicatorColor: Colors.transparent,
           overlayColor: WidgetStateProperty.all(Colors.transparent),
           iconTheme: WidgetStateProperty.resolveWith((states) {
