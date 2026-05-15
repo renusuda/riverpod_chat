@@ -56,9 +56,6 @@ class LoginPage extends HookConsumerWidget {
                       EmailField(
                         controller: emailController,
                         textInputAction: TextInputAction.next,
-                        onFieldSubmitted: (_) {
-                          passwordFocusNode.requestFocus();
-                        },
                       ),
                       SizedBox(height: spacing.p16),
                       PasswordField(

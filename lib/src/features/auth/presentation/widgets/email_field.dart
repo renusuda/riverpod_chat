@@ -6,15 +6,12 @@ class EmailField extends StatelessWidget {
   const EmailField({
     required this.controller,
     required this.textInputAction,
-    required this.onFieldSubmitted,
     super.key,
   });
 
   final TextEditingController controller;
 
   final TextInputAction textInputAction;
-
-  final ValueChanged<String> onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +33,6 @@ class EmailField extends StatelessWidget {
         validator: EmailAddress.validate,
         keyboardType: TextInputType.emailAddress,
         textInputAction: textInputAction,
-        onFieldSubmitted: onFieldSubmitted,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: spacing.p16),
           filled: true,
