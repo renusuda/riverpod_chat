@@ -13,6 +13,7 @@ class App extends ConsumerWidget {
       routerConfig: goRouter,
       title: 'Flutter Demo',
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF3226A)),
         navigationBarTheme: NavigationBarThemeData(
           indicatorColor: Colors.transparent,
