@@ -14,6 +14,24 @@ class App extends ConsumerWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF3226A)),
+        navigationBarTheme: NavigationBarThemeData(
+          indicatorColor: Colors.transparent,
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
+          iconTheme: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const IconThemeData(color: Color(0xFFF3226A));
+            }
+            return null;
+          }),
+          labelTextStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const TextStyle(
+                color: Color(0xFFF3226A),
+              );
+            }
+            return null;
+          }),
+        ),
         inputDecorationTheme: const InputDecorationTheme(
           errorStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
         ),
