@@ -30,4 +30,5 @@ flutter:
 
   assets:
     - assets/app_title.png
+    - assets/dummy_profile.png
     - assets/illustration.png
