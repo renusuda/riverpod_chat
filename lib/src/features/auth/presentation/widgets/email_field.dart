@@ -6,12 +6,15 @@ class EmailField extends StatelessWidget {
   const EmailField({
     required this.controller,
     required this.textInputAction,
+    this.focusNode,
     super.key,
   });
 
   final TextEditingController controller;
 
   final TextInputAction textInputAction;
+
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,7 @@ class EmailField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
+        focusNode: focusNode,
         validator: EmailAddress.validate,
         keyboardType: TextInputType.emailAddress,
         textInputAction: textInputAction,
