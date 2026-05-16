@@ -4,5 +4,8 @@ part 'user_profile.freezed.dart';
 
 @freezed
 abstract class UserProfile with _$UserProfile {
-  const factory UserProfile({required String displayName}) = _UserProfile;
+  const factory UserProfile({
+    required String displayName,
+    required String username,
+  }) = _UserProfile;
 }

@@ -8,6 +8,7 @@ part 'user_profile_dto.g.dart';
 sealed class UserProfileDto with _$UserProfileDto {
   const factory UserProfileDto({
     required String displayName,
+    required String username,
   }) = _UserProfileDto;
 
   const UserProfileDto._();
@@ -15,5 +16,8 @@ sealed class UserProfileDto with _$UserProfileDto {
   factory UserProfileDto.fromJson(Map<String, Object?> json) =>
       _$UserProfileDtoFromJson(json);
 
-  UserProfile toDomain() => UserProfile(displayName: displayName);
+  UserProfile toDomain() => UserProfile(
+    displayName: displayName,
+    username: username,
+  );
 }

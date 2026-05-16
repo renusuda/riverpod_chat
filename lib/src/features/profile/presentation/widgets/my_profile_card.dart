@@ -58,13 +58,20 @@ class _ProfileDisplayName extends ConsumerWidget {
   }
 }
 
-class _ProfileUserId extends StatelessWidget {
+class _ProfileUserId extends ConsumerWidget {
   const _ProfileUserId();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final username = ref
+        .watch(myProfileProvider)
+        .maybeWhen(
+          data: (profile) => profile.username,
+          orElse: () => '',
+        );
+
     return Text(
-      '@kentasato',
+      '@$username',
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: context.textTheme.titleMedium?.copyWith(
