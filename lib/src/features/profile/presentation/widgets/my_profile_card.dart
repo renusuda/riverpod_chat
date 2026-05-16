@@ -23,7 +23,7 @@ class MyProfileCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const _ProfileName(),
+                const _ProfileDisplayName(),
                 SizedBox(height: spacing.p8),
                 const _ProfileUserId(),
               ],
@@ -35,8 +35,8 @@ class MyProfileCard extends StatelessWidget {
   }
 }
 
-class _ProfileName extends ConsumerWidget {
-  const _ProfileName();
+class _ProfileDisplayName extends ConsumerWidget {
+  const _ProfileDisplayName();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
