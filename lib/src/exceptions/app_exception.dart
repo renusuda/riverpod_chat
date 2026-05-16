@@ -12,3 +12,7 @@ class AuthInvalidCredentialsException extends AppException {
   AuthInvalidCredentialsException()
     : super('auth/invalid-credentials', 'メールアドレスまたはパスワードが正しくありません');
 }
+
+class ProfileNotFoundException extends AppException {
+  ProfileNotFoundException() : super('profile/not-found', 'プロフィールが見つかりません');
+}

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_chat/src/core_widgets/app_card.dart';
+import 'package:riverpod_chat/src/features/profile/presentation/providers/my_profile_provider.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class MyProfileCard extends StatelessWidget {
@@ -33,13 +35,20 @@ class MyProfileCard extends StatelessWidget {
   }
 }
 
-class _ProfileName extends StatelessWidget {
+class _ProfileName extends ConsumerWidget {
   const _ProfileName();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final displayName = ref
+        .watch(myProfileProvider)
+        .maybeWhen(
+          data: (profile) => profile.displayName,
+          orElse: () => '',
+        );
+
     return Text(
-      'Kenta Sato',
+      displayName,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: context.textTheme.titleLarge?.copyWith(
