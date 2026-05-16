@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_chat/src/core_widgets/app_card.dart';
@@ -97,7 +98,16 @@ class _ProfileAvatar extends ConsumerWidget {
           Positioned.fill(
             child: ClipOval(
               child: avatarUrl != null
-                  ? Image.network(avatarUrl, fit: BoxFit.cover)
+                  ? CachedNetworkImage(
+                      imageUrl: avatarUrl,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Image.asset(
+                        'assets/default_profile.png',
+                        fit: BoxFit.cover,
+                      ),
+                    )
                   : Image.asset(
                       'assets/default_profile.png',
                       fit: BoxFit.cover,
