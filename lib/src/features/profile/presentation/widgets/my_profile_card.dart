@@ -81,21 +81,27 @@ class _ProfileUserId extends ConsumerWidget {
   }
 }
 
-class _ProfileAvatar extends StatelessWidget {
+class _ProfileAvatar extends ConsumerWidget {
   const _ProfileAvatar();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final avatarUrl = ref
+        .watch(myProfileProvider)
+        .maybeWhen(data: (p) => p.avatarUrl, orElse: () => null);
+
     return SizedBox.square(
       dimension: 75,
       child: Stack(
         children: [
           Positioned.fill(
             child: ClipOval(
-              child: Image.asset(
-                'assets/dummy_profile.png',
-                fit: BoxFit.cover,
-              ),
+              child: avatarUrl != null
+                  ? Image.network(avatarUrl, fit: BoxFit.cover)
+                  : Image.asset(
+                      'assets/default_profile.png',
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           const Align(

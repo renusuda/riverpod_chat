@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserProfileDto {
 
- String get displayName; String get username;
+ String get displayName; String get username; String? get avatarUrl;
 /// Create a copy of UserProfileDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UserProfileDtoCopyWith<UserProfileDto> get copyWith => _$UserProfileDtoCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfileDto&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.username, username) || other.username == username));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfileDto&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.username, username) || other.username == username)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,displayName,username);
+int get hashCode => Object.hash(runtimeType,displayName,username,avatarUrl);
 
 @override
 String toString() {
-  return 'UserProfileDto(displayName: $displayName, username: $username)';
+  return 'UserProfileDto(displayName: $displayName, username: $username, avatarUrl: $avatarUrl)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $UserProfileDtoCopyWith<$Res>  {
   factory $UserProfileDtoCopyWith(UserProfileDto value, $Res Function(UserProfileDto) _then) = _$UserProfileDtoCopyWithImpl;
 @useResult
 $Res call({
- String displayName, String username
+ String displayName, String username, String? avatarUrl
 });
 
 
@@ -65,11 +65,12 @@ class _$UserProfileDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserProfileDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? displayName = null,Object? username = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? displayName = null,Object? username = null,Object? avatarUrl = freezed,}) {
   return _then(_self.copyWith(
 displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
 as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,
+as String,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String displayName,  String username)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String displayName,  String username,  String? avatarUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserProfileDto() when $default != null:
-return $default(_that.displayName,_that.username);case _:
+return $default(_that.displayName,_that.username,_that.avatarUrl);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.displayName,_that.username);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String displayName,  String username)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String displayName,  String username,  String? avatarUrl)  $default,) {final _that = this;
 switch (_that) {
 case _UserProfileDto():
-return $default(_that.displayName,_that.username);}
+return $default(_that.displayName,_that.username,_that.avatarUrl);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -189,10 +190,10 @@ return $default(_that.displayName,_that.username);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String displayName,  String username)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String displayName,  String username,  String? avatarUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _UserProfileDto() when $default != null:
-return $default(_that.displayName,_that.username);case _:
+return $default(_that.displayName,_that.username,_that.avatarUrl);case _:
   return null;
 
 }
@@ -204,11 +205,12 @@ return $default(_that.displayName,_that.username);case _:
 @JsonSerializable()
 
 class _UserProfileDto extends UserProfileDto {
-  const _UserProfileDto({required this.displayName, required this.username}): super._();
+  const _UserProfileDto({required this.displayName, required this.username, this.avatarUrl}): super._();
   factory _UserProfileDto.fromJson(Map<String, dynamic> json) => _$UserProfileDtoFromJson(json);
 
 @override final  String displayName;
 @override final  String username;
+@override final  String? avatarUrl;
 
 /// Create a copy of UserProfileDto
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +225,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfileDto&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.username, username) || other.username == username));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfileDto&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.username, username) || other.username == username)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,displayName,username);
+int get hashCode => Object.hash(runtimeType,displayName,username,avatarUrl);
 
 @override
 String toString() {
-  return 'UserProfileDto(displayName: $displayName, username: $username)';
+  return 'UserProfileDto(displayName: $displayName, username: $username, avatarUrl: $avatarUrl)';
 }
 
 
@@ -243,7 +245,7 @@ abstract mixin class _$UserProfileDtoCopyWith<$Res> implements $UserProfileDtoCo
   factory _$UserProfileDtoCopyWith(_UserProfileDto value, $Res Function(_UserProfileDto) _then) = __$UserProfileDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String displayName, String username
+ String displayName, String username, String? avatarUrl
 });
 
 
@@ -260,11 +262,12 @@ class __$UserProfileDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserProfileDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? displayName = null,Object? username = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? displayName = null,Object? username = null,Object? avatarUrl = freezed,}) {
   return _then(_UserProfileDto(
 displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
 as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,
+as String,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

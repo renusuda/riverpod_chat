@@ -9,6 +9,7 @@ sealed class UserProfileDto with _$UserProfileDto {
   const factory UserProfileDto({
     required String displayName,
     required String username,
+    String? avatarUrl,
   }) = _UserProfileDto;
 
   const UserProfileDto._();
@@ -19,5 +20,6 @@ sealed class UserProfileDto with _$UserProfileDto {
   UserProfile toDomain() => UserProfile(
     displayName: displayName,
     username: username,
+    avatarUrl: avatarUrl,
   );
 }

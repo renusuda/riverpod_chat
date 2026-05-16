@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserProfile {
 
- String get displayName; String get username;
+ String get displayName; String get username; String? get avatarUrl;
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $UserProfileCopyWith<UserProfile> get copyWith => _$UserProfileCopyWithImpl<User
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfile&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.username, username) || other.username == username));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfile&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.username, username) || other.username == username)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,displayName,username);
+int get hashCode => Object.hash(runtimeType,displayName,username,avatarUrl);
 
 @override
 String toString() {
-  return 'UserProfile(displayName: $displayName, username: $username)';
+  return 'UserProfile(displayName: $displayName, username: $username, avatarUrl: $avatarUrl)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $UserProfileCopyWith<$Res>  {
   factory $UserProfileCopyWith(UserProfile value, $Res Function(UserProfile) _then) = _$UserProfileCopyWithImpl;
 @useResult
 $Res call({
- String displayName, String username
+ String displayName, String username, String? avatarUrl
 });
 
 
@@ -62,11 +62,12 @@ class _$UserProfileCopyWithImpl<$Res>
 
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? displayName = null,Object? username = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? displayName = null,Object? username = null,Object? avatarUrl = freezed,}) {
   return _then(_self.copyWith(
 displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
 as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,
+as String,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String displayName,  String username)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String displayName,  String username,  String? avatarUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserProfile() when $default != null:
-return $default(_that.displayName,_that.username);case _:
+return $default(_that.displayName,_that.username,_that.avatarUrl);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.displayName,_that.username);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String displayName,  String username)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String displayName,  String username,  String? avatarUrl)  $default,) {final _that = this;
 switch (_that) {
 case _UserProfile():
-return $default(_that.displayName,_that.username);case _:
+return $default(_that.displayName,_that.username,_that.avatarUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.displayName,_that.username);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String displayName,  String username)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String displayName,  String username,  String? avatarUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _UserProfile() when $default != null:
-return $default(_that.displayName,_that.username);case _:
+return $default(_that.displayName,_that.username,_that.avatarUrl);case _:
   return null;
 
 }
@@ -207,11 +208,12 @@ return $default(_that.displayName,_that.username);case _:
 
 
 class _UserProfile implements UserProfile {
-  const _UserProfile({required this.displayName, required this.username});
+  const _UserProfile({required this.displayName, required this.username, this.avatarUrl});
   
 
 @override final  String displayName;
 @override final  String username;
+@override final  String? avatarUrl;
 
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +225,16 @@ _$UserProfileCopyWith<_UserProfile> get copyWith => __$UserProfileCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfile&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.username, username) || other.username == username));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfile&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.username, username) || other.username == username)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,displayName,username);
+int get hashCode => Object.hash(runtimeType,displayName,username,avatarUrl);
 
 @override
 String toString() {
-  return 'UserProfile(displayName: $displayName, username: $username)';
+  return 'UserProfile(displayName: $displayName, username: $username, avatarUrl: $avatarUrl)';
 }
 
 
@@ -243,7 +245,7 @@ abstract mixin class _$UserProfileCopyWith<$Res> implements $UserProfileCopyWith
   factory _$UserProfileCopyWith(_UserProfile value, $Res Function(_UserProfile) _then) = __$UserProfileCopyWithImpl;
 @override @useResult
 $Res call({
- String displayName, String username
+ String displayName, String username, String? avatarUrl
 });
 
 
@@ -260,11 +262,12 @@ class __$UserProfileCopyWithImpl<$Res>
 
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? displayName = null,Object? username = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? displayName = null,Object? username = null,Object? avatarUrl = freezed,}) {
   return _then(_UserProfile(
 displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
 as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
-as String,
+as String,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

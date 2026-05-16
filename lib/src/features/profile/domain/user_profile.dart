@@ -7,5 +7,6 @@ abstract class UserProfile with _$UserProfile {
   const factory UserProfile({
     required String displayName,
     required String username,
+    String? avatarUrl,
   }) = _UserProfile;
 }

@@ -10,10 +10,12 @@ _UserProfileDto _$UserProfileDtoFromJson(Map<String, dynamic> json) =>
     _UserProfileDto(
       displayName: json['displayName'] as String,
       username: json['username'] as String,
+      avatarUrl: json['avatarUrl'] as String?,
     );
 
 Map<String, dynamic> _$UserProfileDtoToJson(_UserProfileDto instance) =>
     <String, dynamic>{
       'displayName': instance.displayName,
       'username': instance.username,
+      'avatarUrl': instance.avatarUrl,
     };
