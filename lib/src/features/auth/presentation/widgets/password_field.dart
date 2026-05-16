@@ -6,14 +6,11 @@ import 'package:riverpod_chat/src/theme/app_theme.dart';
 class PasswordField extends HookWidget {
   const PasswordField({
     required this.controller,
-    required this.focusNode,
     required this.textInputAction,
     super.key,
   });
 
   final TextEditingController controller;
-
-  final FocusNode focusNode;
 
   final TextInputAction textInputAction;
 
@@ -36,7 +33,6 @@ class PasswordField extends HookWidget {
       ),
       child: TextFormField(
         controller: controller,
-        focusNode: focusNode,
         validator: Password.validate,
         obscureText: obscureText.value,
         textInputAction: textInputAction,

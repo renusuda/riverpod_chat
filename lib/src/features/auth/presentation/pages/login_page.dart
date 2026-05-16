@@ -27,7 +27,6 @@ class LoginPage extends HookConsumerWidget {
     final passwordController = useTextEditingController();
     final scrollController = useScrollController();
     final emailFocusNode = useFocusNode();
-    final passwordFocusNode = useFocusNode();
     final kbController = useMemoized(KeyboardDetectionController.new);
 
     useEffect(() {
@@ -90,7 +89,6 @@ class LoginPage extends HookConsumerWidget {
                         SizedBox(height: spacing.p16),
                         PasswordField(
                           controller: passwordController,
-                          focusNode: passwordFocusNode,
                           textInputAction: TextInputAction.done,
                         ),
                         if (loginErrorMessage != null) ...[
