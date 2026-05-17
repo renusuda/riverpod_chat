@@ -12,25 +12,12 @@ class MyProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final spacing = context.spacing;
-
-    return AppCard(
+    return const AppCard(
       onTap: null,
-      child: Row(
-        children: [
-          const _ProfileAvatar(),
-          SizedBox(width: spacing.p20),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const _ProfileDisplayName(),
-                SizedBox(height: spacing.p8),
-                const _ProfileUserId(),
-              ],
-            ),
-          ),
-        ],
+      child: ListTile(
+        leading: _ProfileAvatar(),
+        title: _ProfileDisplayName(),
+        subtitle: _ProfileUserId(),
       ),
     );
   }
@@ -41,6 +28,8 @@ class _ProfileDisplayName extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = context.textTheme;
+
     final displayName = ref
         .watch(myProfileProvider)
         .maybeWhen(
@@ -52,9 +41,7 @@ class _ProfileDisplayName extends ConsumerWidget {
       displayName,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: context.textTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
+      style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
     );
   }
 }
@@ -75,9 +62,7 @@ class _ProfileUserId extends ConsumerWidget {
       '@$username',
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: context.textTheme.titleMedium?.copyWith(
-        color: Colors.grey,
-      ),
+      style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
     );
   }
 }
@@ -91,24 +76,13 @@ class _ProfileAvatar extends ConsumerWidget {
         .watch(myProfileProvider)
         .maybeWhen(data: (p) => p.avatarUrl, orElse: () => null);
 
-    return SizedBox.square(
-      dimension: 75,
-      child: ClipOval(
-        child: avatarUrl != null
-            ? CachedNetworkImage(
-                imageUrl: avatarUrl,
-                fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Image.asset(
-                  'assets/default_profile.png',
-                  fit: BoxFit.cover,
-                ),
-              )
-            : Image.asset(
-                'assets/default_profile.png',
-                fit: BoxFit.cover,
-              ),
+    return CachedNetworkImage(
+      imageUrl: avatarUrl ?? '',
+      fit: BoxFit.cover,
+      placeholder: (context, url) => const CircularProgressIndicator(),
+      errorWidget: (context, url, error) => Image.asset(
+        'assets/default_profile.png',
+        fit: BoxFit.cover,
       ),
     );
   }
