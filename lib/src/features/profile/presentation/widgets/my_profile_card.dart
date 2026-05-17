@@ -4,6 +4,7 @@ import 'package:riverpod_chat/src/core_widgets/app_card.dart';
 import 'package:riverpod_chat/src/core_widgets/avatar.dart';
 import 'package:riverpod_chat/src/features/profile/presentation/providers/my_profile_provider.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MyProfileCard extends StatelessWidget {
   const MyProfileCard({super.key});
@@ -45,13 +46,30 @@ class _ProfileDisplayName extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = context.textTheme;
+    final myProfileAsyncValue = ref.watch(myProfileProvider);
 
-    final displayName = ref
-        .watch(myProfileProvider)
-        .maybeWhen(
-          data: (profile) => profile.displayName,
-          orElse: () => '',
-        );
+    if (myProfileAsyncValue.isLoading) {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 90,
+            height: 16,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+      );
+    }
+
+    final displayName = myProfileAsyncValue.maybeWhen(
+      data: (profile) => profile.displayName,
+      orElse: () => '',
+    );
 
     return Text(
       displayName,
