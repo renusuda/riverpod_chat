@@ -93,49 +93,22 @@ class _ProfileAvatar extends ConsumerWidget {
 
     return SizedBox.square(
       dimension: 75,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: ClipOval(
-              child: avatarUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: avatarUrl,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Image.asset(
-                        'assets/default_profile.png',
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : Image.asset(
-                      'assets/default_profile.png',
-                      fit: BoxFit.cover,
-                    ),
-            ),
-          ),
-          const Align(
-            alignment: Alignment.bottomRight,
-            child: _OnlineStatus(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _OnlineStatus extends StatelessWidget {
-  const _OnlineStatus();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 18,
-      height: 18,
-      decoration: BoxDecoration(
-        color: const Color(0xFF1FE66E),
-        shape: BoxShape.circle,
-        border: Border.all(color: Colors.white, width: 3),
+      child: ClipOval(
+        child: avatarUrl != null
+            ? CachedNetworkImage(
+                imageUrl: avatarUrl,
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Image.asset(
+                  'assets/default_profile.png',
+                  fit: BoxFit.cover,
+                ),
+              )
+            : Image.asset(
+                'assets/default_profile.png',
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }
