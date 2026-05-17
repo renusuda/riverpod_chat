@@ -9,7 +9,7 @@ import 'package:riverpod_chat/src/features/auth/data/auth_repository_provider.da
 import 'package:riverpod_chat/src/features/auth/data/remote/auth_remote_data_source.dart';
 import 'package:riverpod_chat/src/features/auth/domain/app_user.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/pages/login_page.dart';
-import 'package:riverpod_chat/src/features/chat/presentation/pages/chats_page.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/pages/conversations_page.dart';
 
 void main() {
   testWidgets('メールアドレスが空でログインするとエラーが表示され、ログイン画面に留まる', (
@@ -64,7 +64,7 @@ void main() {
     await _tapLoginButton(tester);
     await tester.pumpAndSettle();
 
-    expect(find.byType(ChatsPage), findsOneWidget);
+    expect(find.byType(ConversationsPage), findsOneWidget);
   });
 }
 
