@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_chat/src/features/profile/presentation/providers/my_profile_provider.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ProfileUsername extends ConsumerWidget {
-  const ProfileUsername({super.key});
+class ProfileUsername extends StatelessWidget {
+  const ProfileUsername({
+    required this.username,
+    required this.isLoading,
+    super.key,
+  });
+
+  final String username;
+  final bool isLoading;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final myProfileAsyncValue = ref.watch(myProfileProvider);
-
-    if (myProfileAsyncValue.isLoading) {
+  Widget build(BuildContext context) {
+    if (isLoading) {
       return Align(
         alignment: Alignment.centerLeft,
         child: Shimmer.fromColors(
@@ -28,11 +31,6 @@ class ProfileUsername extends ConsumerWidget {
         ),
       );
     }
-
-    final username = myProfileAsyncValue.maybeWhen(
-      data: (profile) => profile.username,
-      orElse: () => '',
-    );
 
     return Text(
       '@$username',
