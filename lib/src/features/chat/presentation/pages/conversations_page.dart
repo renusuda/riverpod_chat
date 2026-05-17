@@ -1,36 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_chat/src/features/chat/domain/conversation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/providers/conversations_provider.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/widgets/conversation_list_tile.dart';
 
-final _mockConversations = <Conversation>[
-  Conversation(
-    partnerName: 'Tanaka Misaki',
-    lastMessage: '週末が待ちきれない！',
-    updatedAt: DateTime.now().subtract(const Duration(minutes: 5)),
-  ),
-  Conversation(
-    partnerName: 'Suzuki Ren',
-    lastMessage: '了解、またね',
-    updatedAt: DateTime.now().subtract(const Duration(minutes: 20)),
-  ),
-  Conversation(
-    partnerName: 'Sato Aoi',
-    lastMessage: '写真を送りました',
-    updatedAt: DateTime.now().subtract(const Duration(hours: 1)),
-  ),
-];
-
-class ConversationsPage extends StatelessWidget {
+class ConversationsPage extends ConsumerWidget {
   const ConversationsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final conversationsAsync = ref.watch(conversationsProvider);
     return SafeArea(
-      child: ListView.builder(
-        itemCount: _mockConversations.length,
-        itemBuilder: (context, index) => ConversationListTile(
-          conversation: _mockConversations[index],
+      child: conversationsAsync.when(
+        data: (conversations) => ListView.builder(
+          itemCount: conversations.length,
+          itemBuilder: (context, index) => ConversationListTile(
+            conversation: conversations[index],
+          ),
         ),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, _) => Center(child: Text(e.toString())),
       ),
     );
   }
