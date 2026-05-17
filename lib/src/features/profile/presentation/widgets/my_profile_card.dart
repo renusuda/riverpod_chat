@@ -85,12 +85,30 @@ class _ProfileUsername extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final username = ref
-        .watch(myProfileProvider)
-        .maybeWhen(
-          data: (profile) => profile.username,
-          orElse: () => '',
-        );
+    final myProfileAsyncValue = ref.watch(myProfileProvider);
+
+    if (myProfileAsyncValue.isLoading) {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 80,
+            height: 14,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+      );
+    }
+
+    final username = myProfileAsyncValue.maybeWhen(
+      data: (profile) => profile.username,
+      orElse: () => '',
+    );
 
     return Text(
       '@$username',
