@@ -15,7 +15,6 @@ class ConversationListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spacing = context.spacing;
-    final textTheme = context.textTheme;
 
     return ListTile(
       contentPadding: EdgeInsets.symmetric(
@@ -23,16 +22,41 @@ class ConversationListTile extends StatelessWidget {
         vertical: spacing.p4,
       ),
       leading: Avatar(avatarUrl: conversation.partnerAvatarUrl),
-      title: Text(
-        conversation.partnerName,
-        style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+      title: _TitleRow(
+        partnerName: conversation.partnerName,
+        updatedAt: conversation.updatedAt,
       ),
       subtitle: _LastMessagePreview(lastMessage: conversation.lastMessage),
-      trailing: Text(
-        timeago.format(conversation.updatedAt, locale: 'ja'),
-        style: textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
-      ),
-      titleAlignment: ListTileTitleAlignment.top,
+    );
+  }
+}
+
+class _TitleRow extends StatelessWidget {
+  const _TitleRow({
+    required this.partnerName,
+    required this.updatedAt,
+  });
+
+  final String partnerName;
+  final DateTime updatedAt;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = context.textTheme;
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            partnerName,
+            style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        Text(
+          timeago.format(updatedAt, locale: 'ja'),
+          style: textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
+        ),
+      ],
     );
   }
 }
