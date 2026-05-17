@@ -17,7 +17,7 @@ class MyProfileCard extends StatelessWidget {
       child: ListTile(
         leading: _ProfileAvatar(),
         title: _ProfileDisplayName(),
-        subtitle: _ProfileUserId(),
+        subtitle: _ProfileUsername(),
       ),
     );
   }
@@ -46,8 +46,8 @@ class _ProfileDisplayName extends ConsumerWidget {
   }
 }
 
-class _ProfileUserId extends ConsumerWidget {
-  const _ProfileUserId();
+class _ProfileUsername extends ConsumerWidget {
+  const _ProfileUsername();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
