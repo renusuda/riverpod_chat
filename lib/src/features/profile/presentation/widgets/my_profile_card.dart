@@ -1,14 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_chat/src/core_widgets/app_card.dart';
+import 'package:riverpod_chat/src/core_widgets/avatar.dart';
 import 'package:riverpod_chat/src/features/profile/presentation/providers/my_profile_provider.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class MyProfileCard extends StatelessWidget {
-  const MyProfileCard({
-    super.key,
-  });
+  const MyProfileCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +18,19 @@ class MyProfileCard extends StatelessWidget {
         subtitle: _ProfileUsername(),
       ),
     );
+  }
+}
+
+class _ProfileAvatar extends ConsumerWidget {
+  const _ProfileAvatar();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final avatarUrl = ref
+        .watch(myProfileProvider)
+        .maybeWhen(data: (p) => p.avatarUrl, orElse: () => null);
+
+    return Avatar(avatarUrl: avatarUrl);
   }
 }
 
@@ -63,27 +74,6 @@ class _ProfileUsername extends ConsumerWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
-    );
-  }
-}
-
-class _ProfileAvatar extends ConsumerWidget {
-  const _ProfileAvatar();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final avatarUrl = ref
-        .watch(myProfileProvider)
-        .maybeWhen(data: (p) => p.avatarUrl, orElse: () => null);
-
-    return CachedNetworkImage(
-      imageUrl: avatarUrl ?? '',
-      fit: BoxFit.cover,
-      placeholder: (context, url) => const CircularProgressIndicator(),
-      errorWidget: (context, url, error) => Image.asset(
-        'assets/default_profile.png',
-        fit: BoxFit.cover,
-      ),
     );
   }
 }
