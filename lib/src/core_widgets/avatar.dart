@@ -8,12 +8,16 @@ class Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: avatarUrl ?? '',
-      fit: BoxFit.cover,
-      placeholder: (context, url) => const CircularProgressIndicator(),
-      errorWidget: (context, url, error) =>
-          Image.asset('assets/default_profile.png', fit: BoxFit.cover),
+    return SizedBox.square(
+      dimension: 50,
+      child: CachedNetworkImage(
+        imageUrl: avatarUrl ?? '',
+        fit: BoxFit.cover,
+        placeholder: (context, url) =>
+            const CircularProgressIndicator(strokeWidth: 2),
+        errorWidget: (context, url, error) =>
+            Image.asset('assets/default_profile.png', fit: BoxFit.cover),
+      ),
     );
   }
 }
