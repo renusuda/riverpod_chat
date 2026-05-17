@@ -26,11 +26,16 @@ class _ProfileAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final avatarUrl = ref
-        .watch(myProfileProvider)
-        .maybeWhen(data: (p) => p.avatarUrl, orElse: () => null);
+    final myProfileAsyncValue = ref.watch(myProfileProvider);
+    final avatarUrl = myProfileAsyncValue.maybeWhen(
+      data: (p) => p.avatarUrl,
+      orElse: () => null,
+    );
 
-    return Avatar(avatarUrl: avatarUrl);
+    return Avatar(
+      avatarUrl: avatarUrl,
+      isLoading: myProfileAsyncValue.isLoading,
+    );
   }
 }
 
