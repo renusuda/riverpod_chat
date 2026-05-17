@@ -6,7 +6,7 @@ class ConversationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('チャット画面'),
+      child: Text('DM一覧画面'),
     );
   }
 }

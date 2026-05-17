@@ -26,7 +26,7 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
             selectedIndex: selectedIndex,
             destinations: const [
               NavigationDestination(
-                label: 'チャット',
+                label: 'DM',
                 icon: Icon(Icons.sms),
               ),
               NavigationDestination(
