@@ -36,8 +36,9 @@ class ProfileDisplayName extends StatelessWidget {
       displayName,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: context.textTheme.titleMedium
-          ?.copyWith(fontWeight: FontWeight.bold),
+      style: context.textTheme.titleMedium?.copyWith(
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 }

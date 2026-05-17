@@ -11,9 +11,12 @@ class MyProfileCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncValue = ref.watch(myProfileProvider);
-    final isLoading = asyncValue.isLoading;
-    final profile = asyncValue.maybeWhen(data: (p) => p, orElse: () => null);
+    final myProfileAsyncValue = ref.watch(myProfileProvider);
+    final isLoading = myProfileAsyncValue.isLoading;
+    final profile = myProfileAsyncValue.maybeWhen(
+      data: (p) => p,
+      orElse: () => null,
+    );
 
     return AppCard(
       onTap: null,
