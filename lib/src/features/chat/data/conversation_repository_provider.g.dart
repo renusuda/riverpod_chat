@@ -56,7 +56,7 @@ final class ConversationRemoteDataSourceProvider
 }
 
 String _$conversationRemoteDataSourceHash() =>
-    r'ec5ea3aadf4fe83e67ed6a0f7bbdd774d3f36561';
+    r'6d644e80a2233194fc994c04317e0e5383c992ee';
 
 @ProviderFor(conversationRepository)
 final conversationRepositoryProvider = ConversationRepositoryProvider._();

@@ -1,5 +1,5 @@
 import 'package:riverpod_chat/src/features/chat/data/remote/conversation_remote_data_source.dart';
-import 'package:riverpod_chat/src/features/chat/domain/conversation.dart';
+import 'package:riverpod_chat/src/features/chat/domain/conversation_metadata.dart';
 
 class ConversationRepository {
   const ConversationRepository({
@@ -8,7 +8,9 @@ class ConversationRepository {
 
   final ConversationRemoteDataSource _remoteDataSource;
 
-  Future<List<Conversation>> fetchConversations() {
-    return _remoteDataSource.fetchConversations();
+  Future<List<ConversationMetadata>> fetchConversations({
+    required String currentUserId,
+  }) {
+    return _remoteDataSource.fetchConversations(currentUserId: currentUserId);
   }
 }
