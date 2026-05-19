@@ -7,16 +7,19 @@ import 'package:timeago/timeago.dart' as timeago;
 class ConversationListTile extends StatelessWidget {
   const ConversationListTile({
     required this.conversation,
+    required this.onTap,
     super.key,
   });
 
   final Conversation conversation;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final spacing = context.spacing;
 
     return ListTile(
+      onTap: onTap,
       contentPadding: EdgeInsets.symmetric(
         horizontal: spacing.p16,
         vertical: spacing.p4,

@@ -1,1 +1,1 @@
-enum AppRoute { login, conversations, profile }
+enum AppRoute { login, conversations, messages, profile }

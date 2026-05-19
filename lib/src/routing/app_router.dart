@@ -4,6 +4,7 @@ import 'package:riverpod_chat/src/core_widgets/scaffold_with_navigation_bar.dart
 import 'package:riverpod_chat/src/features/auth/data/auth_repository_provider.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/pages/login_page.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/pages/conversations_page.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/pages/messages_page.dart';
 import 'package:riverpod_chat/src/features/profile/presentation/pages/profile_page.dart';
 import 'package:riverpod_chat/src/routing/app_route.dart';
 import 'package:riverpod_chat/src/routing/go_router_refresh_stream.dart';
@@ -37,6 +38,11 @@ GoRouter goRouter(Ref ref) {
         path: '/login',
         name: AppRoute.login.name,
         builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: '/messages',
+        name: AppRoute.messages.name,
+        builder: (context, state) => const MessagesPage(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
