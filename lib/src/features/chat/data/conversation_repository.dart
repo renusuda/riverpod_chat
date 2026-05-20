@@ -13,4 +13,14 @@ class ConversationRepository {
   }) {
     return _remoteDataSource.fetchConversations(currentUserId: currentUserId);
   }
+
+  Future<ConversationMetadata> fetchConversation({
+    required String id,
+    required String currentUserId,
+  }) {
+    return _remoteDataSource.fetchConversation(
+      id: id,
+      currentUserId: currentUserId,
+    );
+  }
 }

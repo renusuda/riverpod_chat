@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_chat/src/core_widgets/avatar.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/providers/messages_provider.dart';
+import 'package:riverpod_chat/src/theme/app_theme.dart';
 
-class MessagesPage extends StatelessWidget {
+class MessagesPage extends ConsumerWidget {
   const MessagesPage({
     required this.conversationId,
     super.key,
@@ -9,10 +13,37 @@ class MessagesPage extends StatelessWidget {
   final String conversationId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final spacing = context.spacing;
+
+    final messagesAsync = ref.watch(
+      messagesProvider(conversationId: conversationId),
+    );
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        title: messagesAsync.maybeWhen(
+          data: (chatMessages) => Row(
+            children: [
+              Avatar(
+                avatarUrl: chatMessages.partnerAvatarUrl,
+              ),
+              SizedBox(width: spacing.p12),
+              Expanded(
+                child: Text(
+                  chatMessages.partnerName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: context.textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          orElse: () => const SizedBox.shrink(),
+        ),
       ),
       body: Center(child: Text(conversationId)),
     );

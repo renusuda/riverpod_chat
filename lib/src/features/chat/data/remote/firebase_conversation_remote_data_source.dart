@@ -26,4 +26,14 @@ class FirebaseConversationRemoteDataSource
       return dto.toDomain(id: doc.id, currentUserId: currentUserId);
     }).toList();
   }
+
+  @override
+  Future<ConversationMetadata> fetchConversation({
+    required String id,
+    required String currentUserId,
+  }) async {
+    final doc = await _firestore.collection('conversations').doc(id).get();
+    final dto = ConversationDto.fromJson(doc.data()!);
+    return dto.toDomain(id: doc.id, currentUserId: currentUserId);
+  }
 }
