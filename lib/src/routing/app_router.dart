@@ -40,9 +40,12 @@ GoRouter goRouter(Ref ref) {
         builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
-        path: '/messages',
+        path: '/messages/:conversationId',
         name: AppRoute.messages.name,
-        builder: (context, state) => const MessagesPage(),
+        builder: (context, state) {
+          final conversationId = state.pathParameters['conversationId']!;
+          return MessagesPage(conversationId: conversationId);
+        },
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {

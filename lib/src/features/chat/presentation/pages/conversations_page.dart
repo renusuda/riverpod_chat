@@ -17,7 +17,10 @@ class ConversationsPage extends ConsumerWidget {
           itemCount: conversations.length,
           itemBuilder: (context, index) => ConversationListTile(
             conversation: conversations[index],
-            onTap: () => context.pushNamed(AppRoute.messages.name),
+            onTap: () => context.pushNamed(
+              AppRoute.messages.name,
+              pathParameters: {'conversationId': conversations[index].id},
+            ),
           ),
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
