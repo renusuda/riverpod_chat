@@ -5,6 +5,7 @@ part 'conversation.freezed.dart';
 @freezed
 abstract class Conversation with _$Conversation {
   const factory Conversation({
+    required String id,
     required String partnerName,
     required String lastMessage,
     required DateTime updatedAt,

@@ -21,9 +21,9 @@ class FirebaseConversationRemoteDataSource
         .orderBy('updatedAt', descending: true)
         .get();
 
-    return snapshot.docs
-        .map((doc) => ConversationDto.fromJson(doc.data()))
-        .map((dto) => dto.toDomain(currentUserId: currentUserId))
-        .toList();
+    return snapshot.docs.map((doc) {
+      final dto = ConversationDto.fromJson(doc.data());
+      return dto.toDomain(id: doc.id, currentUserId: currentUserId);
+    }).toList();
   }
 }

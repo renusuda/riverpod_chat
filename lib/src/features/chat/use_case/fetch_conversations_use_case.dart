@@ -31,6 +31,7 @@ class FetchConversationsUseCase {
         );
 
         return Conversation(
+          id: metadata.id,
           partnerName: partnerProfile.displayName,
           lastMessage: metadata.lastMessage,
           updatedAt: metadata.updatedAt,

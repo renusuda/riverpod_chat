@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ConversationMetadata {
 
- String get partnerId; String get lastMessage; DateTime get updatedAt;
+ String get id; String get partnerId; String get lastMessage; DateTime get updatedAt;
 /// Create a copy of ConversationMetadata
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ConversationMetadataCopyWith<ConversationMetadata> get copyWith => _$Conversati
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConversationMetadata&&(identical(other.partnerId, partnerId) || other.partnerId == partnerId)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConversationMetadata&&(identical(other.id, id) || other.id == id)&&(identical(other.partnerId, partnerId) || other.partnerId == partnerId)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,partnerId,lastMessage,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,partnerId,lastMessage,updatedAt);
 
 @override
 String toString() {
-  return 'ConversationMetadata(partnerId: $partnerId, lastMessage: $lastMessage, updatedAt: $updatedAt)';
+  return 'ConversationMetadata(id: $id, partnerId: $partnerId, lastMessage: $lastMessage, updatedAt: $updatedAt)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ConversationMetadataCopyWith<$Res>  {
   factory $ConversationMetadataCopyWith(ConversationMetadata value, $Res Function(ConversationMetadata) _then) = _$ConversationMetadataCopyWithImpl;
 @useResult
 $Res call({
- String partnerId, String lastMessage, DateTime updatedAt
+ String id, String partnerId, String lastMessage, DateTime updatedAt
 });
 
 
@@ -62,9 +62,10 @@ class _$ConversationMetadataCopyWithImpl<$Res>
 
 /// Create a copy of ConversationMetadata
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? partnerId = null,Object? lastMessage = null,Object? updatedAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? partnerId = null,Object? lastMessage = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
-partnerId: null == partnerId ? _self.partnerId : partnerId // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,partnerId: null == partnerId ? _self.partnerId : partnerId // ignore: cast_nullable_to_non_nullable
 as String,lastMessage: null == lastMessage ? _self.lastMessage : lastMessage // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
@@ -152,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String partnerId,  String lastMessage,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String partnerId,  String lastMessage,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ConversationMetadata() when $default != null:
-return $default(_that.partnerId,_that.lastMessage,_that.updatedAt);case _:
+return $default(_that.id,_that.partnerId,_that.lastMessage,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -173,10 +174,10 @@ return $default(_that.partnerId,_that.lastMessage,_that.updatedAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String partnerId,  String lastMessage,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String partnerId,  String lastMessage,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _ConversationMetadata():
-return $default(_that.partnerId,_that.lastMessage,_that.updatedAt);case _:
+return $default(_that.id,_that.partnerId,_that.lastMessage,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +194,10 @@ return $default(_that.partnerId,_that.lastMessage,_that.updatedAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String partnerId,  String lastMessage,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String partnerId,  String lastMessage,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _ConversationMetadata() when $default != null:
-return $default(_that.partnerId,_that.lastMessage,_that.updatedAt);case _:
+return $default(_that.id,_that.partnerId,_that.lastMessage,_that.updatedAt);case _:
   return null;
 
 }
@@ -208,9 +209,10 @@ return $default(_that.partnerId,_that.lastMessage,_that.updatedAt);case _:
 
 
 class _ConversationMetadata implements ConversationMetadata {
-  const _ConversationMetadata({required this.partnerId, required this.lastMessage, required this.updatedAt});
+  const _ConversationMetadata({required this.id, required this.partnerId, required this.lastMessage, required this.updatedAt});
   
 
+@override final  String id;
 @override final  String partnerId;
 @override final  String lastMessage;
 @override final  DateTime updatedAt;
@@ -225,16 +227,16 @@ _$ConversationMetadataCopyWith<_ConversationMetadata> get copyWith => __$Convers
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ConversationMetadata&&(identical(other.partnerId, partnerId) || other.partnerId == partnerId)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ConversationMetadata&&(identical(other.id, id) || other.id == id)&&(identical(other.partnerId, partnerId) || other.partnerId == partnerId)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,partnerId,lastMessage,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,partnerId,lastMessage,updatedAt);
 
 @override
 String toString() {
-  return 'ConversationMetadata(partnerId: $partnerId, lastMessage: $lastMessage, updatedAt: $updatedAt)';
+  return 'ConversationMetadata(id: $id, partnerId: $partnerId, lastMessage: $lastMessage, updatedAt: $updatedAt)';
 }
 
 
@@ -245,7 +247,7 @@ abstract mixin class _$ConversationMetadataCopyWith<$Res> implements $Conversati
   factory _$ConversationMetadataCopyWith(_ConversationMetadata value, $Res Function(_ConversationMetadata) _then) = __$ConversationMetadataCopyWithImpl;
 @override @useResult
 $Res call({
- String partnerId, String lastMessage, DateTime updatedAt
+ String id, String partnerId, String lastMessage, DateTime updatedAt
 });
 
 
@@ -262,9 +264,10 @@ class __$ConversationMetadataCopyWithImpl<$Res>
 
 /// Create a copy of ConversationMetadata
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? partnerId = null,Object? lastMessage = null,Object? updatedAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? partnerId = null,Object? lastMessage = null,Object? updatedAt = null,}) {
   return _then(_ConversationMetadata(
-partnerId: null == partnerId ? _self.partnerId : partnerId // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,partnerId: null == partnerId ? _self.partnerId : partnerId // ignore: cast_nullable_to_non_nullable
 as String,lastMessage: null == lastMessage ? _self.lastMessage : lastMessage // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime,

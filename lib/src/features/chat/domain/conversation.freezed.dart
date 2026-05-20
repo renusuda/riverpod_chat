@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Conversation {
 
- String get partnerName; String get lastMessage; DateTime get updatedAt; String? get partnerAvatarUrl;
+ String get id; String get partnerName; String get lastMessage; DateTime get updatedAt; String? get partnerAvatarUrl;
 /// Create a copy of Conversation
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ConversationCopyWith<Conversation> get copyWith => _$ConversationCopyWithImpl<C
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Conversation&&(identical(other.partnerName, partnerName) || other.partnerName == partnerName)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.partnerAvatarUrl, partnerAvatarUrl) || other.partnerAvatarUrl == partnerAvatarUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Conversation&&(identical(other.id, id) || other.id == id)&&(identical(other.partnerName, partnerName) || other.partnerName == partnerName)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.partnerAvatarUrl, partnerAvatarUrl) || other.partnerAvatarUrl == partnerAvatarUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,partnerName,lastMessage,updatedAt,partnerAvatarUrl);
+int get hashCode => Object.hash(runtimeType,id,partnerName,lastMessage,updatedAt,partnerAvatarUrl);
 
 @override
 String toString() {
-  return 'Conversation(partnerName: $partnerName, lastMessage: $lastMessage, updatedAt: $updatedAt, partnerAvatarUrl: $partnerAvatarUrl)';
+  return 'Conversation(id: $id, partnerName: $partnerName, lastMessage: $lastMessage, updatedAt: $updatedAt, partnerAvatarUrl: $partnerAvatarUrl)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ConversationCopyWith<$Res>  {
   factory $ConversationCopyWith(Conversation value, $Res Function(Conversation) _then) = _$ConversationCopyWithImpl;
 @useResult
 $Res call({
- String partnerName, String lastMessage, DateTime updatedAt, String? partnerAvatarUrl
+ String id, String partnerName, String lastMessage, DateTime updatedAt, String? partnerAvatarUrl
 });
 
 
@@ -62,9 +62,10 @@ class _$ConversationCopyWithImpl<$Res>
 
 /// Create a copy of Conversation
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? partnerName = null,Object? lastMessage = null,Object? updatedAt = null,Object? partnerAvatarUrl = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? partnerName = null,Object? lastMessage = null,Object? updatedAt = null,Object? partnerAvatarUrl = freezed,}) {
   return _then(_self.copyWith(
-partnerName: null == partnerName ? _self.partnerName : partnerName // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,partnerName: null == partnerName ? _self.partnerName : partnerName // ignore: cast_nullable_to_non_nullable
 as String,lastMessage: null == lastMessage ? _self.lastMessage : lastMessage // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime,partnerAvatarUrl: freezed == partnerAvatarUrl ? _self.partnerAvatarUrl : partnerAvatarUrl // ignore: cast_nullable_to_non_nullable
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String partnerName,  String lastMessage,  DateTime updatedAt,  String? partnerAvatarUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String partnerName,  String lastMessage,  DateTime updatedAt,  String? partnerAvatarUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Conversation() when $default != null:
-return $default(_that.partnerName,_that.lastMessage,_that.updatedAt,_that.partnerAvatarUrl);case _:
+return $default(_that.id,_that.partnerName,_that.lastMessage,_that.updatedAt,_that.partnerAvatarUrl);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.partnerName,_that.lastMessage,_that.updatedAt,_that.partne
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String partnerName,  String lastMessage,  DateTime updatedAt,  String? partnerAvatarUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String partnerName,  String lastMessage,  DateTime updatedAt,  String? partnerAvatarUrl)  $default,) {final _that = this;
 switch (_that) {
 case _Conversation():
-return $default(_that.partnerName,_that.lastMessage,_that.updatedAt,_that.partnerAvatarUrl);case _:
+return $default(_that.id,_that.partnerName,_that.lastMessage,_that.updatedAt,_that.partnerAvatarUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return $default(_that.partnerName,_that.lastMessage,_that.updatedAt,_that.partne
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String partnerName,  String lastMessage,  DateTime updatedAt,  String? partnerAvatarUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String partnerName,  String lastMessage,  DateTime updatedAt,  String? partnerAvatarUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _Conversation() when $default != null:
-return $default(_that.partnerName,_that.lastMessage,_that.updatedAt,_that.partnerAvatarUrl);case _:
+return $default(_that.id,_that.partnerName,_that.lastMessage,_that.updatedAt,_that.partnerAvatarUrl);case _:
   return null;
 
 }
@@ -209,9 +210,10 @@ return $default(_that.partnerName,_that.lastMessage,_that.updatedAt,_that.partne
 
 
 class _Conversation implements Conversation {
-  const _Conversation({required this.partnerName, required this.lastMessage, required this.updatedAt, this.partnerAvatarUrl});
+  const _Conversation({required this.id, required this.partnerName, required this.lastMessage, required this.updatedAt, this.partnerAvatarUrl});
   
 
+@override final  String id;
 @override final  String partnerName;
 @override final  String lastMessage;
 @override final  DateTime updatedAt;
@@ -227,16 +229,16 @@ _$ConversationCopyWith<_Conversation> get copyWith => __$ConversationCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Conversation&&(identical(other.partnerName, partnerName) || other.partnerName == partnerName)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.partnerAvatarUrl, partnerAvatarUrl) || other.partnerAvatarUrl == partnerAvatarUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Conversation&&(identical(other.id, id) || other.id == id)&&(identical(other.partnerName, partnerName) || other.partnerName == partnerName)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.partnerAvatarUrl, partnerAvatarUrl) || other.partnerAvatarUrl == partnerAvatarUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,partnerName,lastMessage,updatedAt,partnerAvatarUrl);
+int get hashCode => Object.hash(runtimeType,id,partnerName,lastMessage,updatedAt,partnerAvatarUrl);
 
 @override
 String toString() {
-  return 'Conversation(partnerName: $partnerName, lastMessage: $lastMessage, updatedAt: $updatedAt, partnerAvatarUrl: $partnerAvatarUrl)';
+  return 'Conversation(id: $id, partnerName: $partnerName, lastMessage: $lastMessage, updatedAt: $updatedAt, partnerAvatarUrl: $partnerAvatarUrl)';
 }
 
 
@@ -247,7 +249,7 @@ abstract mixin class _$ConversationCopyWith<$Res> implements $ConversationCopyWi
   factory _$ConversationCopyWith(_Conversation value, $Res Function(_Conversation) _then) = __$ConversationCopyWithImpl;
 @override @useResult
 $Res call({
- String partnerName, String lastMessage, DateTime updatedAt, String? partnerAvatarUrl
+ String id, String partnerName, String lastMessage, DateTime updatedAt, String? partnerAvatarUrl
 });
 
 
@@ -264,9 +266,10 @@ class __$ConversationCopyWithImpl<$Res>
 
 /// Create a copy of Conversation
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? partnerName = null,Object? lastMessage = null,Object? updatedAt = null,Object? partnerAvatarUrl = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? partnerName = null,Object? lastMessage = null,Object? updatedAt = null,Object? partnerAvatarUrl = freezed,}) {
   return _then(_Conversation(
-partnerName: null == partnerName ? _self.partnerName : partnerName // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,partnerName: null == partnerName ? _self.partnerName : partnerName // ignore: cast_nullable_to_non_nullable
 as String,lastMessage: null == lastMessage ? _self.lastMessage : lastMessage // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime,partnerAvatarUrl: freezed == partnerAvatarUrl ? _self.partnerAvatarUrl : partnerAvatarUrl // ignore: cast_nullable_to_non_nullable

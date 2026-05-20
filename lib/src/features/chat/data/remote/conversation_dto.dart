@@ -25,8 +25,12 @@ sealed class ConversationDto with _$ConversationDto {
     );
   }
 
-  ConversationMetadata toDomain({required String currentUserId}) {
+  ConversationMetadata toDomain({
+    required String id,
+    required String currentUserId,
+  }) {
     return ConversationMetadata(
+      id: id,
       partnerId: _partnerId(currentUserId),
       lastMessage: lastMessage ?? '',
       updatedAt: updatedAt,
