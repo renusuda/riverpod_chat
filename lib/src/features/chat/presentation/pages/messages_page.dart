@@ -37,7 +37,7 @@ class MessagesPage extends ConsumerWidget {
                   chatMessages.partnerName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.textTheme.titleLarge?.copyWith(
+                  style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
