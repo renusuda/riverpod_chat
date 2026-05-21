@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_chat/src/routing/app_router.dart';
 import 'package:riverpod_chat/src/theme/app_spacing.dart';
@@ -15,6 +16,9 @@ class App extends ConsumerWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF3226A)),
+        textTheme: GoogleFonts.interTextTheme().apply(
+          fontFamilyFallback: [GoogleFonts.notoSansJp().fontFamily!],
+        ),
         navigationBarTheme: NavigationBarThemeData(
           backgroundColor: Colors.white,
           indicatorColor: Colors.transparent,
