@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod_chat/src/features/chat/data/remote/conversation_dto.dart';
 import 'package:riverpod_chat/src/features/chat/data/remote/conversation_remote_data_source.dart';
+import 'package:riverpod_chat/src/features/chat/data/remote/message_dto.dart';
 import 'package:riverpod_chat/src/features/chat/domain/conversation_metadata.dart';
+import 'package:riverpod_chat/src/features/chat/domain/message.dart';
 
 class FirebaseConversationRemoteDataSource
     implements ConversationRemoteDataSource {
@@ -35,5 +37,27 @@ class FirebaseConversationRemoteDataSource
     final doc = await _firestore.collection('conversations').doc(id).get();
     final dto = ConversationDto.fromJson(doc.data()!);
     return dto.toDomain(id: doc.id, currentUserId: currentUserId);
+  }
+
+  @override
+  Stream<List<Message>> watchMessages({
+    required String conversationId,
+    required String currentUserId,
+  }) {
+    return _firestore
+        .collection('conversations')
+        .doc(conversationId)
+        .collection('messages')
+        .orderBy('createdAt', descending: false)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs
+              .map(
+                (doc) => MessageDto.fromJson(
+                  doc.data(),
+                ).toDomain(id: doc.id, currentUserId: currentUserId),
+              )
+              .toList(),
+        );
   }
 }

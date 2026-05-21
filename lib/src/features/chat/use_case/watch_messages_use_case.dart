@@ -3,8 +3,8 @@ import 'package:riverpod_chat/src/features/chat/data/conversation_repository.dar
 import 'package:riverpod_chat/src/features/chat/domain/chat_message.dart';
 import 'package:riverpod_chat/src/features/profile/data/profile_repository.dart';
 
-class FetchMessagesUseCase {
-  const FetchMessagesUseCase({
+class WatchMessagesUseCase {
+  const WatchMessagesUseCase({
     required ConversationRepository conversationRepository,
     required AuthRepository authRepository,
     required ProfileRepository profileRepository,
@@ -16,7 +16,7 @@ class FetchMessagesUseCase {
   final AuthRepository _authRepository;
   final ProfileRepository _profileRepository;
 
-  Future<ChatMessage> execute({required String conversationId}) async {
+  Stream<ChatMessage> execute({required String conversationId}) async* {
     final currentUser = _authRepository.currentUser!;
 
     final conversation = await _conversationRepository.fetchConversation(
@@ -27,10 +27,18 @@ class FetchMessagesUseCase {
       uid: conversation.partnerId,
     );
 
-    return ChatMessage(
-      conversationId: conversation.id,
-      partnerName: partnerProfile.displayName,
-      partnerAvatarUrl: partnerProfile.avatarUrl,
-    );
+    yield* _conversationRepository
+        .watchMessages(
+          conversationId: conversationId,
+          currentUserId: currentUser.uid,
+        )
+        .map(
+          (messages) => ChatMessage(
+            conversationId: conversation.id,
+            partnerName: partnerProfile.displayName,
+            partnerAvatarUrl: partnerProfile.avatarUrl,
+            messages: messages,
+          ),
+        );
   }
 }

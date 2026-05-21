@@ -1,28 +1,27 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_chat/src/features/auth/data/auth_repository_provider.dart';
+import 'package:riverpod_chat/src/features/auth/data/remote/auth_remote_data_source.dart';
+import 'package:riverpod_chat/src/features/auth/domain/app_user.dart';
 import 'package:riverpod_chat/src/features/chat/domain/chat_message.dart';
+import 'package:riverpod_chat/src/features/chat/domain/message.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/pages/messages_page.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/providers/messages_provider.dart';
 import 'package:riverpod_chat/src/theme/app_spacing.dart';
 
 void main() {
   testWidgets('アプリバーにチャット相手の画像と名前が表示されること', (tester) async {
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          messagesProvider.overrideWith(
-            (ref, conversationId) async => ChatMessage(
-              conversationId: conversationId,
-              partnerName: 'テストユーザー',
-              partnerAvatarUrl: 'https://example.com/avatar.jpg',
-            ),
-          ),
-        ],
-        child: const _TestApp(
-          home: MessagesPage(conversationId: 'conversation-1'),
-        ),
+    await _pumpMessagesPage(
+      tester,
+      chatMessage: const ChatMessage(
+        conversationId: 'conversation-1',
+        partnerName: 'テストユーザー',
+        partnerAvatarUrl: 'https://example.com/avatar.jpg',
+        messages: [],
       ),
     );
 
@@ -31,6 +30,52 @@ void main() {
     expect(find.text('テストユーザー'), findsOneWidget);
     expect(find.byType(CachedNetworkImage), findsOneWidget);
   });
+
+  testWidgets('相手のメッセージにアバターと時刻が表示されること', (tester) async {
+    await _pumpMessagesPage(
+      tester,
+      chatMessage: ChatMessage(
+        conversationId: 'conversation-1',
+        partnerName: 'テストユーザー',
+        partnerAvatarUrl: 'https://example.com/avatar.jpg',
+        messages: [
+          Message(
+            id: 'message-1',
+            isMe: false,
+            text: '週末が楽しみです',
+            createdAt: DateTime(2026, 1, 2, 9, 35),
+          ),
+        ],
+      ),
+    );
+
+    await tester.pump();
+
+    expect(find.text('週末が楽しみです'), findsOneWidget);
+    expect(find.text('09:35'), findsOneWidget);
+    expect(find.byType(CachedNetworkImage), findsNWidgets(2));
+  });
+}
+
+Future<void> _pumpMessagesPage(
+  WidgetTester tester, {
+  required ChatMessage chatMessage,
+}) {
+  return tester.pumpWidget(
+    ProviderScope(
+      overrides: [
+        authRemoteDataSourceProvider.overrideWithValue(
+          FakeAuthRemoteDataSource(),
+        ),
+        messagesProvider.overrideWith(
+          (ref, conversationId) => Stream.value(chatMessage),
+        ),
+      ],
+      child: const _TestApp(
+        home: MessagesPage(conversationId: 'conversation-1'),
+      ),
+    ),
+  );
 }
 
 class _TestApp extends StatelessWidget {
@@ -47,4 +92,23 @@ class _TestApp extends StatelessWidget {
       home: home,
     );
   }
+}
+
+class FakeAuthRemoteDataSource implements AuthRemoteDataSource {
+  final _authStateController = StreamController<AppUser?>.broadcast();
+
+  @override
+  Future<void> login({required String email, required String password}) async {}
+
+  @override
+  Future<void> logout() async {}
+
+  @override
+  AppUser? get currentUser => const AppUser(
+    uid: 'test-uid',
+    email: 'test@example.com',
+  );
+
+  @override
+  Stream<AppUser?> authStateChanges() => _authStateController.stream;
 }

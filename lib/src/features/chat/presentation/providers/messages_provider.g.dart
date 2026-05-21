@@ -17,9 +17,9 @@ final class MessagesProvider
         $FunctionalProvider<
           AsyncValue<ChatMessage>,
           ChatMessage,
-          FutureOr<ChatMessage>
+          Stream<ChatMessage>
         >
-    with $FutureModifier<ChatMessage>, $FutureProvider<ChatMessage> {
+    with $FutureModifier<ChatMessage>, $StreamProvider<ChatMessage> {
   MessagesProvider._({
     required MessagesFamily super.from,
     required String super.argument,
@@ -43,12 +43,12 @@ final class MessagesProvider
 
   @$internal
   @override
-  $FutureProviderElement<ChatMessage> $createElement(
+  $StreamProviderElement<ChatMessage> $createElement(
     $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
+  ) => $StreamProviderElement(pointer);
 
   @override
-  FutureOr<ChatMessage> create(Ref ref) {
+  Stream<ChatMessage> create(Ref ref) {
     final argument = this.argument as String;
     return messages(ref, conversationId: argument);
   }
@@ -64,10 +64,10 @@ final class MessagesProvider
   }
 }
 
-String _$messagesHash() => r'98cdb3e1c92fb7a0912828b814c6e6bd7d8a109a';
+String _$messagesHash() => r'dfee7d45e86509f44b3f9a1df70c96b77c9a19e2';
 
 final class MessagesFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<ChatMessage>, String> {
+    with $FunctionalFamilyOverride<Stream<ChatMessage>, String> {
   MessagesFamily._()
     : super(
         retry: null,

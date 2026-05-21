@@ -1,5 +1,6 @@
 import 'package:riverpod_chat/src/features/chat/data/remote/conversation_remote_data_source.dart';
 import 'package:riverpod_chat/src/features/chat/domain/conversation_metadata.dart';
+import 'package:riverpod_chat/src/features/chat/domain/message.dart';
 
 class ConversationRepository {
   const ConversationRepository({
@@ -20,6 +21,16 @@ class ConversationRepository {
   }) {
     return _remoteDataSource.fetchConversation(
       id: id,
+      currentUserId: currentUserId,
+    );
+  }
+
+  Stream<List<Message>> watchMessages({
+    required String conversationId,
+    required String currentUserId,
+  }) {
+    return _remoteDataSource.watchMessages(
+      conversationId: conversationId,
       currentUserId: currentUserId,
     );
   }
