@@ -42,3 +42,15 @@ flutter:
     - assets/app_title.png
     - assets/default_profile.png
     - assets/illustration.png
+
+  fonts:
+    - family: LINESeedJP
+      fonts:
+        - asset: assets/fonts/LINESeedJP-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/LINESeedJP-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/LINESeedJP-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/LINESeedJP-ExtraBold.ttf
+          weight: 800
