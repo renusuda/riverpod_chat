@@ -2,7 +2,7 @@ import 'package:riverpod_chat/src/features/chat/domain/conversation_metadata.dar
 import 'package:riverpod_chat/src/features/chat/domain/message.dart';
 
 abstract interface class ConversationRemoteDataSource {
-  Future<List<ConversationMetadata>> fetchConversations({
+  Stream<List<ConversationMetadata>> watchConversations({
     required String currentUserId,
   });
 

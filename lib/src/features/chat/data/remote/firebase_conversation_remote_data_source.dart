@@ -14,22 +14,6 @@ class FirebaseConversationRemoteDataSource
   final FirebaseFirestore _firestore;
 
   @override
-  Future<List<ConversationMetadata>> fetchConversations({
-    required String currentUserId,
-  }) async {
-    final snapshot = await _firestore
-        .collection('conversations')
-        .where('memberIds', arrayContains: currentUserId)
-        .orderBy('updatedAt', descending: true)
-        .get();
-
-    return snapshot.docs.map((doc) {
-      final dto = ConversationDto.fromJson(doc.data());
-      return dto.toDomain(id: doc.id, currentUserId: currentUserId);
-    }).toList();
-  }
-
-  @override
   Future<ConversationMetadata> fetchConversation({
     required String id,
     required String currentUserId,
@@ -37,6 +21,23 @@ class FirebaseConversationRemoteDataSource
     final doc = await _firestore.collection('conversations').doc(id).get();
     final dto = ConversationDto.fromJson(doc.data()!);
     return dto.toDomain(id: doc.id, currentUserId: currentUserId);
+  }
+
+  @override
+  Stream<List<ConversationMetadata>> watchConversations({
+    required String currentUserId,
+  }) {
+    return _firestore
+        .collection('conversations')
+        .where('memberIds', arrayContains: currentUserId)
+        .orderBy('updatedAt', descending: true)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs.map((doc) {
+            final dto = ConversationDto.fromJson(doc.data());
+            return dto.toDomain(id: doc.id, currentUserId: currentUserId);
+          }).toList(),
+        );
   }
 
   @override
@@ -77,12 +78,9 @@ class FirebaseConversationRemoteDataSource
           'createdAt': FieldValue.serverTimestamp(),
         });
 
-    await _firestore
-        .collection('conversations')
-        .doc(conversationId)
-        .update({
-          'lastMessage': text,
-          'updatedAt': FieldValue.serverTimestamp(),
-        });
+    await _firestore.collection('conversations').doc(conversationId).update({
+      'lastMessage': text,
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
   }
 }

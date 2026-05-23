@@ -17,11 +17,11 @@ final class ConversationsProvider
         $FunctionalProvider<
           AsyncValue<List<Conversation>>,
           List<Conversation>,
-          FutureOr<List<Conversation>>
+          Stream<List<Conversation>>
         >
     with
         $FutureModifier<List<Conversation>>,
-        $FutureProvider<List<Conversation>> {
+        $StreamProvider<List<Conversation>> {
   ConversationsProvider._()
     : super(
         from: null,
@@ -38,14 +38,14 @@ final class ConversationsProvider
 
   @$internal
   @override
-  $FutureProviderElement<List<Conversation>> $createElement(
+  $StreamProviderElement<List<Conversation>> $createElement(
     $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
+  ) => $StreamProviderElement(pointer);
 
   @override
-  FutureOr<List<Conversation>> create(Ref ref) {
+  Stream<List<Conversation>> create(Ref ref) {
     return conversations(ref);
   }
 }
 
-String _$conversationsHash() => r'db6be78ec615b62325915f36b72df8160cfef9b6';
+String _$conversationsHash() => r'3388070dddcb544b4297b28954b2a0f02c9c47f8';

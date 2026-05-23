@@ -9,12 +9,6 @@ class ConversationRepository {
 
   final ConversationRemoteDataSource _remoteDataSource;
 
-  Future<List<ConversationMetadata>> fetchConversations({
-    required String currentUserId,
-  }) {
-    return _remoteDataSource.fetchConversations(currentUserId: currentUserId);
-  }
-
   Future<ConversationMetadata> fetchConversation({
     required String id,
     required String currentUserId,
@@ -23,6 +17,12 @@ class ConversationRepository {
       id: id,
       currentUserId: currentUserId,
     );
+  }
+
+  Stream<List<ConversationMetadata>> watchConversations({
+    required String currentUserId,
+  }) {
+    return _remoteDataSource.watchConversations(currentUserId: currentUserId);
   }
 
   Stream<List<Message>> watchMessages({
