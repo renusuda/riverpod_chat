@@ -20,14 +20,14 @@ class MessagesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final spacing = context.spacing;
 
-    final messagesAsync = ref.watch(
+    final messagesAsyncValue = ref.watch(
       messagesProvider(conversationId: conversationId),
     );
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: messagesAsync.maybeWhen(
+        title: messagesAsyncValue.maybeWhen(
           data: (chatMessages) => Row(
             children: [
               Avatar(
@@ -54,7 +54,7 @@ class MessagesPage extends ConsumerWidget {
           children: [
             Expanded(
               child: AsyncValueWidget(
-                asyncValue: messagesAsync,
+                asyncValue: messagesAsyncValue,
                 data: (chatMessages) => _MessageList(
                   chatMessages: chatMessages,
                 ),
