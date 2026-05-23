@@ -80,6 +80,9 @@ class FirebaseConversationRemoteDataSource
     await _firestore
         .collection('conversations')
         .doc(conversationId)
-        .update({'lastMessage': text});
+        .update({
+          'lastMessage': text,
+          'updatedAt': FieldValue.serverTimestamp(),
+        });
   }
 }
