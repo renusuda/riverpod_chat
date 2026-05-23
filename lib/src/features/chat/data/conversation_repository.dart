@@ -34,4 +34,16 @@ class ConversationRepository {
       currentUserId: currentUserId,
     );
   }
+
+  Future<void> sendMessage({
+    required String conversationId,
+    required String senderId,
+    required String text,
+  }) {
+    return _remoteDataSource.sendMessage(
+      conversationId: conversationId,
+      senderId: senderId,
+      text: text,
+    );
+  }
 }

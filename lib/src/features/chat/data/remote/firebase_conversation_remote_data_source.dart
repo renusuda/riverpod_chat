@@ -60,4 +60,21 @@ class FirebaseConversationRemoteDataSource
               .toList(),
         );
   }
+
+  @override
+  Future<void> sendMessage({
+    required String conversationId,
+    required String senderId,
+    required String text,
+  }) {
+    return _firestore
+        .collection('conversations')
+        .doc(conversationId)
+        .collection('messages')
+        .add({
+          'senderId': senderId,
+          'text': text,
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+  }
 }

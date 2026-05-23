@@ -94,8 +94,8 @@ Future<void> _pumpMessagesPage(
         authRemoteDataSourceProvider.overrideWithValue(
           FakeAuthRemoteDataSource(),
         ),
-        messagesProvider.overrideWith(
-          (ref, conversationId) => Stream.value(chatMessage),
+        messagesProvider.overrideWith2(
+          (_) => _FakeMessages(chatMessage),
         ),
       ],
       child: const _TestApp(
@@ -118,6 +118,16 @@ class _TestApp extends StatelessWidget {
       ),
       home: home,
     );
+  }
+}
+
+class _FakeMessages extends Messages {
+  _FakeMessages(this._chatMessage);
+  final ChatMessage _chatMessage;
+
+  @override
+  Stream<ChatMessage> build({required String conversationId}) {
+    return Stream.value(_chatMessage);
   }
 }
 

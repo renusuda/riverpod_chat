@@ -15,4 +15,10 @@ abstract interface class ConversationRemoteDataSource {
     required String conversationId,
     required String currentUserId,
   });
+
+  Future<void> sendMessage({
+    required String conversationId,
+    required String senderId,
+    required String text,
+  });
 }

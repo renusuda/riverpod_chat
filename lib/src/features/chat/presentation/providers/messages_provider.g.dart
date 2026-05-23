@@ -9,17 +9,11 @@ part of 'messages_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(messages)
+@ProviderFor(Messages)
 final messagesProvider = MessagesFamily._();
 
 final class MessagesProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<ChatMessage>,
-          ChatMessage,
-          Stream<ChatMessage>
-        >
-    with $FutureModifier<ChatMessage>, $StreamProvider<ChatMessage> {
+    extends $StreamNotifierProvider<Messages, ChatMessage> {
   MessagesProvider._({
     required MessagesFamily super.from,
     required String super.argument,
@@ -43,15 +37,7 @@ final class MessagesProvider
 
   @$internal
   @override
-  $StreamProviderElement<ChatMessage> $createElement(
-    $ProviderPointer pointer,
-  ) => $StreamProviderElement(pointer);
-
-  @override
-  Stream<ChatMessage> create(Ref ref) {
-    final argument = this.argument as String;
-    return messages(ref, conversationId: argument);
-  }
+  Messages create() => Messages();
 
   @override
   bool operator ==(Object other) {
@@ -64,10 +50,17 @@ final class MessagesProvider
   }
 }
 
-String _$messagesHash() => r'dfee7d45e86509f44b3f9a1df70c96b77c9a19e2';
+String _$messagesHash() => r'e628916c2e8eba00c5e25d144e0adfb7b6310c0e';
 
 final class MessagesFamily extends $Family
-    with $FunctionalFamilyOverride<Stream<ChatMessage>, String> {
+    with
+        $ClassFamilyOverride<
+          Messages,
+          AsyncValue<ChatMessage>,
+          ChatMessage,
+          Stream<ChatMessage>,
+          String
+        > {
   MessagesFamily._()
     : super(
         retry: null,
@@ -82,4 +75,25 @@ final class MessagesFamily extends $Family
 
   @override
   String toString() => r'messagesProvider';
+}
+
+abstract class _$Messages extends $StreamNotifier<ChatMessage> {
+  late final _$args = ref.$arg as String;
+  String get conversationId => _$args;
+
+  Stream<ChatMessage> build({required String conversationId});
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<ChatMessage>, ChatMessage>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<ChatMessage>, ChatMessage>,
+              AsyncValue<ChatMessage>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, () => build(conversationId: _$args));
+  }
 }

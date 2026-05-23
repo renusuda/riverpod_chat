@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/providers/messages_provider.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
-class MessageInputBar extends HookWidget {
-  const MessageInputBar({super.key});
+class MessageInputBar extends HookConsumerWidget {
+  const MessageInputBar({
+    required this.conversationId,
+    super.key,
+  });
+
+  final String conversationId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final spacing = context.spacing;
     final textTheme = context.textTheme;
 
@@ -67,7 +74,19 @@ class MessageInputBar extends HookWidget {
           ),
           SizedBox(width: spacing.p8),
           IconButton.filled(
-            onPressed: canSend ? controller.clear : null,
+            onPressed: canSend
+                ? () async {
+                    final text = controller.text.trim();
+                    controller.clear();
+                    await ref
+                        .read(
+                          messagesProvider(
+                            conversationId: conversationId,
+                          ).notifier,
+                        )
+                        .send(text);
+                  }
+                : null,
             style: IconButton.styleFrom(
               backgroundColor: const Color(0xFFFF2D67),
               foregroundColor: Colors.white,

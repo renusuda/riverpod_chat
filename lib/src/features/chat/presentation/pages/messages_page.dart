@@ -60,7 +60,7 @@ class MessagesPage extends ConsumerWidget {
                 error: (e, _) => Center(child: Text(e.toString())),
               ),
             ),
-            const MessageInputBar(),
+            MessageInputBar(conversationId: conversationId),
           ],
         ),
       ),
