@@ -66,8 +66,8 @@ class FirebaseConversationRemoteDataSource
     required String conversationId,
     required String senderId,
     required String text,
-  }) {
-    return _firestore
+  }) async {
+    await _firestore
         .collection('conversations')
         .doc(conversationId)
         .collection('messages')
@@ -76,5 +76,10 @@ class FirebaseConversationRemoteDataSource
           'text': text,
           'createdAt': FieldValue.serverTimestamp(),
         });
+
+    await _firestore
+        .collection('conversations')
+        .doc(conversationId)
+        .update({'lastMessage': text});
   }
 }
