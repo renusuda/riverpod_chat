@@ -55,6 +55,33 @@ void main() {
     expect(find.text('09:35'), findsOneWidget);
     expect(find.byType(CachedNetworkImage), findsNWidgets(2));
   });
+
+  testWidgets('自分のメッセージに本文と時刻が表示され、メッセージアバターは表示されないこと', (
+    tester,
+  ) async {
+    await _pumpMessagesPage(
+      tester,
+      chatMessage: ChatMessage(
+        conversationId: 'conversation-1',
+        partnerName: 'テストユーザー',
+        partnerAvatarUrl: 'https://example.com/avatar.jpg',
+        messages: [
+          Message(
+            id: 'message-1',
+            isMe: true,
+            text: 'こちらも楽しみです',
+            createdAt: DateTime(2026, 1, 2, 9, 36),
+          ),
+        ],
+      ),
+    );
+
+    await tester.pump();
+
+    expect(find.text('こちらも楽しみです'), findsOneWidget);
+    expect(find.text('09:36'), findsOneWidget);
+    expect(find.byType(CachedNetworkImage), findsOneWidget);
+  });
 }
 
 Future<void> _pumpMessagesPage(
