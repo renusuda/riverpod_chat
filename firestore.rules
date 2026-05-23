@@ -14,7 +14,11 @@ service cloud.firestore {
       match /messages/{messageId} {
         allow read: if request.auth != null
           && request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.memberIds;
-        allow write: if false;
+        allow create: if request.auth != null
+          && request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.memberIds
+          && request.resource.data.senderId == request.auth.uid;
+        allow update: if false;
+        allow delete: if false;
       }
     }
   }
