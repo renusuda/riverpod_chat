@@ -78,6 +78,7 @@ class _MessageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      reverse: true,
       padding: EdgeInsets.all(context.spacing.p16),
       itemCount: chatMessages.messages.length,
       itemBuilder: (context, index) => MessageBubble(
