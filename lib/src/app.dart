@@ -35,6 +35,11 @@ class App extends ConsumerWidget {
             return null;
           }),
         ),
+        appBarTheme: const AppBarTheme(
+          // スクロール時にAppBarの背景色が変更されないようにする
+          // https://github.com/flutter/flutter/issues/160192
+          scrolledUnderElevation: 0,
+        ),
         inputDecorationTheme: const InputDecorationTheme(
           errorStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
         ),
