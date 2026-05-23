@@ -4,6 +4,7 @@ import 'package:riverpod_chat/src/core_widgets/avatar.dart';
 import 'package:riverpod_chat/src/features/chat/domain/chat_message.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/providers/messages_provider.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/widgets/message_bubble.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/widgets/message_input_bar.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class MessagesPage extends ConsumerWidget {
@@ -47,12 +48,21 @@ class MessagesPage extends ConsumerWidget {
           orElse: () => const SizedBox.shrink(),
         ),
       ),
-      body: messagesAsync.when(
-        data: (chatMessages) => _MessageList(
-          chatMessages: chatMessages,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: messagesAsync.when(
+                data: (chatMessages) => _MessageList(
+                  chatMessages: chatMessages,
+                ),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (e, _) => Center(child: Text(e.toString())),
+              ),
+            ),
+            const MessageInputBar(),
+          ],
         ),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text(e.toString())),
       ),
     );
   }
