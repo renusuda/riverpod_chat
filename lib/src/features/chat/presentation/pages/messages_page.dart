@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_chat/src/core_widgets/async_value_widget.dart';
 import 'package:riverpod_chat/src/core_widgets/avatar.dart';
 import 'package:riverpod_chat/src/features/chat/domain/chat_message.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/providers/messages_provider.dart';
@@ -52,12 +53,11 @@ class MessagesPage extends ConsumerWidget {
         child: Column(
           children: [
             Expanded(
-              child: messagesAsync.when(
+              child: AsyncValueWidget(
+                asyncValue: messagesAsync,
                 data: (chatMessages) => _MessageList(
                   chatMessages: chatMessages,
                 ),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (e, _) => Center(child: Text(e.toString())),
               ),
             ),
             MessageInputBar(conversationId: conversationId),
