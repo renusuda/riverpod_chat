@@ -27,16 +27,16 @@ class MessagesPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: messagesAsyncValue.maybeWhen(
-          data: (chatMessages) => Row(
+        title: switch (messagesAsyncValue) {
+          AsyncValue(:final value?) => Row(
             children: [
               Avatar(
-                avatarUrl: chatMessages.partnerAvatarUrl,
+                avatarUrl: value.partnerAvatarUrl,
               ),
               SizedBox(width: spacing.p12),
               Expanded(
                 child: Text(
-                  chatMessages.partnerName,
+                  value.partnerName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.titleMedium?.copyWith(
@@ -46,8 +46,8 @@ class MessagesPage extends ConsumerWidget {
               ),
             ],
           ),
-          orElse: () => const SizedBox.shrink(),
-        ),
+          _ => const SizedBox.shrink(),
+        },
       ),
       body: SafeArea(
         child: Column(
