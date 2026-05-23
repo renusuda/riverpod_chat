@@ -16,8 +16,8 @@ class AsyncValueWidget<T> extends StatelessWidget {
     return switch (asyncValue) {
       AsyncValue(:final value?) => data(value),
       AsyncValue(error: != null) => Center(
-          child: Text('${asyncValue.error}'),
-        ),
+        child: Text('${asyncValue.error}'),
+      ),
       AsyncValue() => const Center(child: CircularProgressIndicator()),
     };
   }
