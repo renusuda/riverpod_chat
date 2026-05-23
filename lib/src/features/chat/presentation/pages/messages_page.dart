@@ -77,13 +77,16 @@ class _MessageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      reverse: true,
-      padding: EdgeInsets.all(context.spacing.p16),
-      itemCount: chatMessages.messages.length,
-      itemBuilder: (context, index) => MessageBubble(
-        message: chatMessages.messages[index],
-        partnerAvatarUrl: chatMessages.partnerAvatarUrl,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: ListView.builder(
+        reverse: true,
+        padding: EdgeInsets.all(context.spacing.p16),
+        itemCount: chatMessages.messages.length,
+        itemBuilder: (context, index) => MessageBubble(
+          message: chatMessages.messages[index],
+          partnerAvatarUrl: chatMessages.partnerAvatarUrl,
+        ),
       ),
     );
   }
