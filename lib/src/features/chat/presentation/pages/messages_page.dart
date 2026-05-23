@@ -3,8 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_chat/src/core_widgets/avatar.dart';
 import 'package:riverpod_chat/src/features/chat/domain/chat_message.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/providers/messages_provider.dart';
-import 'package:riverpod_chat/src/features/chat/presentation/widgets/my_message_bubble.dart';
-import 'package:riverpod_chat/src/features/chat/presentation/widgets/partner_message_bubble.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/widgets/message_bubble.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class MessagesPage extends ConsumerWidget {
@@ -71,18 +70,10 @@ class _MessageList extends StatelessWidget {
     return ListView.builder(
       padding: EdgeInsets.all(context.spacing.p16),
       itemCount: chatMessages.messages.length,
-      itemBuilder: (context, index) {
-        final message = chatMessages.messages[index];
-
-        if (message.isMe) {
-          return MyMessageBubble(message: message);
-        }
-
-        return PartnerMessageBubble(
-          message: message,
-          avatarUrl: chatMessages.partnerAvatarUrl,
-        );
-      },
+      itemBuilder: (context, index) => MessageBubble(
+        message: chatMessages.messages[index],
+        partnerAvatarUrl: chatMessages.partnerAvatarUrl,
+      ),
     );
   }
 }
