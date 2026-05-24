@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/providers/messages_provider.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/providers/typing_status_provider.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class MessageInputBar extends HookConsumerWidget {
@@ -20,6 +23,17 @@ class MessageInputBar extends HookConsumerWidget {
     final controller = useTextEditingController();
     final textValue = useListenable(controller).text;
     final canSend = textValue.trim().isNotEmpty;
+
+    useEffect(() {
+      unawaited(
+        ref
+            .read(
+              typingStatusProvider(conversationId: conversationId).notifier,
+            )
+            .update(isTyping: textValue.trim().isNotEmpty),
+      );
+      return null;
+    }, [textValue]);
 
     return Padding(
       padding: EdgeInsets.symmetric(
