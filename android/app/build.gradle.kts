@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.riverpod_chat"
+    namespace = "com.renusuda.riverpod_chat"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.riverpod_chat"
+        applicationId = "com.renusuda.riverpod_chat"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
