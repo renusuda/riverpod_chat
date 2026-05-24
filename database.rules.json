@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "typing": {
+      "$conversationId": {
+        "$userId": {
+          ".read": "auth != null",
+          ".write": "auth != null && auth.uid === $userId"
+        }
+      }
+    }
+  }
+}
