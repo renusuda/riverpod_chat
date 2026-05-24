@@ -15,4 +15,12 @@ class TypingRepository {
     userId: userId,
     isTyping: isTyping,
   );
+
+  Stream<bool> watchPartnerTypingStatus({
+    required String conversationId,
+    required String partnerId,
+  }) => _remoteDataSource.watchPartnerTypingStatus(
+    conversationId: conversationId,
+    partnerId: partnerId,
+  );
 }

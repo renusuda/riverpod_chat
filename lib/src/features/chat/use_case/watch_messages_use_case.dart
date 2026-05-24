@@ -35,6 +35,7 @@ class WatchMessagesUseCase {
         .map(
           (messages) => ChatMessage(
             conversationId: conversation.id,
+            partnerId: conversation.partnerId,
             partnerName: partnerProfile.displayName,
             partnerAvatarUrl: partnerProfile.avatarUrl,
             messages: messages,

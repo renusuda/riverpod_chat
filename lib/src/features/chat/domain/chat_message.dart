@@ -7,6 +7,7 @@ part 'chat_message.freezed.dart';
 abstract class ChatMessage with _$ChatMessage {
   const factory ChatMessage({
     required String conversationId,
+    required String partnerId,
     required String partnerName,
     required List<Message> messages,
     String? partnerAvatarUrl,

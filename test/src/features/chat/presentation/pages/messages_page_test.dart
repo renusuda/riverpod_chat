@@ -11,6 +11,9 @@ import 'package:riverpod_chat/src/features/chat/domain/chat_message.dart';
 import 'package:riverpod_chat/src/features/chat/domain/message.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/pages/messages_page.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/providers/messages_provider.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/providers/typing_status_provider.dart';
+import 'package:riverpod_chat/src/features/chat/use_case/update_typing_status_use_case.dart';
+import 'package:riverpod_chat/src/features/chat/use_case/update_typing_status_use_case_provider.dart';
 import 'package:riverpod_chat/src/theme/app_spacing.dart';
 
 void main() {
@@ -19,6 +22,7 @@ void main() {
       tester,
       chatMessage: const ChatMessage(
         conversationId: 'conversation-1',
+        partnerId: 'partner-1',
         partnerName: 'テストユーザー',
         partnerAvatarUrl: 'https://example.com/avatar.jpg',
         messages: [],
@@ -36,6 +40,7 @@ void main() {
       tester,
       chatMessage: ChatMessage(
         conversationId: 'conversation-1',
+        partnerId: 'partner-1',
         partnerName: 'テストユーザー',
         partnerAvatarUrl: 'https://example.com/avatar.jpg',
         messages: [
@@ -63,6 +68,7 @@ void main() {
       tester,
       chatMessage: ChatMessage(
         conversationId: 'conversation-1',
+        partnerId: 'partner-1',
         partnerName: 'テストユーザー',
         partnerAvatarUrl: 'https://example.com/avatar.jpg',
         messages: [
@@ -97,6 +103,10 @@ Future<void> _pumpMessagesPage(
         messagesProvider.overrideWith2(
           (_) => _FakeMessages(chatMessage),
         ),
+        typingStatusProvider.overrideWith2((_) => _FakeTypingStatus()),
+        updateTypingStatusUseCaseProvider.overrideWithValue(
+          _FakeUpdateTypingStatusUseCase(),
+        ),
       ],
       child: const _TestApp(
         home: MessagesPage(conversationId: 'conversation-1'),
@@ -129,6 +139,24 @@ class _FakeMessages extends Messages {
   Stream<ChatMessage> build({required String conversationId}) {
     return Stream.value(_chatMessage);
   }
+}
+
+class _FakeTypingStatus extends TypingStatus {
+  @override
+  Stream<bool> build({
+    required String conversationId,
+    required String partnerId,
+  }) {
+    return Stream.value(false);
+  }
+}
+
+class _FakeUpdateTypingStatusUseCase implements UpdateTypingStatusUseCase {
+  @override
+  Future<void> execute({
+    required String conversationId,
+    required bool isTyping,
+  }) async {}
 }
 
 class FakeAuthRemoteDataSource implements AuthRemoteDataSource {

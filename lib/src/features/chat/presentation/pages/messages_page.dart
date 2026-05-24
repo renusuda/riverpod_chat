@@ -4,8 +4,10 @@ import 'package:riverpod_chat/src/core_widgets/async_value_widget.dart';
 import 'package:riverpod_chat/src/core_widgets/avatar.dart';
 import 'package:riverpod_chat/src/features/chat/domain/chat_message.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/providers/messages_provider.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/providers/typing_status_provider.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/widgets/message_bubble.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/widgets/message_input_bar.dart';
+import 'package:riverpod_chat/src/features/chat/presentation/widgets/typing_indicator.dart';
 import 'package:riverpod_chat/src/theme/app_theme.dart';
 
 class MessagesPage extends ConsumerWidget {
@@ -60,7 +62,10 @@ class MessagesPage extends ConsumerWidget {
                 ),
               ),
             ),
-            MessageInputBar(conversationId: conversationId),
+            MessageInputBar(
+              conversationId: conversationId,
+              partnerId: messagesAsyncValue.asData?.value.partnerId ?? '',
+            ),
           ],
         ),
       ),
@@ -68,25 +73,46 @@ class MessagesPage extends ConsumerWidget {
   }
 }
 
-class _MessageList extends StatelessWidget {
-  const _MessageList({
-    required this.chatMessages,
-  });
+class _MessageList extends ConsumerWidget {
+  const _MessageList({required this.chatMessages});
 
   final ChatMessage chatMessages;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isTyping =
+        ref
+            .watch(
+              typingStatusProvider(
+                conversationId: chatMessages.conversationId,
+                partnerId: chatMessages.partnerId,
+              ),
+            )
+            .asData
+            ?.value ??
+        false;
+
+    final messageCount = chatMessages.messages.length;
+    final itemCount = messageCount + (isTyping ? 1 : 0);
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: ListView.builder(
         reverse: true,
         padding: EdgeInsets.all(context.spacing.p16),
-        itemCount: chatMessages.messages.length,
-        itemBuilder: (context, index) => MessageBubble(
-          message: chatMessages.messages[index],
-          partnerAvatarUrl: chatMessages.partnerAvatarUrl,
-        ),
+        itemCount: itemCount,
+        itemBuilder: (context, index) {
+          if (isTyping && index == 0) {
+            return TypingIndicator(
+              partnerAvatarUrl: chatMessages.partnerAvatarUrl,
+            );
+          }
+          final messageIndex = index - (isTyping ? 1 : 0);
+          return MessageBubble(
+            message: chatMessages.messages[messageIndex],
+            partnerAvatarUrl: chatMessages.partnerAvatarUrl,
+          );
+        },
       ),
     );
   }

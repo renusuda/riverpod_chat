@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatMessage {
 
- String get conversationId; String get partnerName; List<Message> get messages; String? get partnerAvatarUrl;
+ String get conversationId; String get partnerId; String get partnerName; List<Message> get messages; String? get partnerAvatarUrl;
 /// Create a copy of ChatMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ChatMessageCopyWith<ChatMessage> get copyWith => _$ChatMessageCopyWithImpl<Chat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatMessage&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.partnerName, partnerName) || other.partnerName == partnerName)&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.partnerAvatarUrl, partnerAvatarUrl) || other.partnerAvatarUrl == partnerAvatarUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatMessage&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.partnerId, partnerId) || other.partnerId == partnerId)&&(identical(other.partnerName, partnerName) || other.partnerName == partnerName)&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.partnerAvatarUrl, partnerAvatarUrl) || other.partnerAvatarUrl == partnerAvatarUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,conversationId,partnerName,const DeepCollectionEquality().hash(messages),partnerAvatarUrl);
+int get hashCode => Object.hash(runtimeType,conversationId,partnerId,partnerName,const DeepCollectionEquality().hash(messages),partnerAvatarUrl);
 
 @override
 String toString() {
-  return 'ChatMessage(conversationId: $conversationId, partnerName: $partnerName, messages: $messages, partnerAvatarUrl: $partnerAvatarUrl)';
+  return 'ChatMessage(conversationId: $conversationId, partnerId: $partnerId, partnerName: $partnerName, messages: $messages, partnerAvatarUrl: $partnerAvatarUrl)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ChatMessageCopyWith<$Res>  {
   factory $ChatMessageCopyWith(ChatMessage value, $Res Function(ChatMessage) _then) = _$ChatMessageCopyWithImpl;
 @useResult
 $Res call({
- String conversationId, String partnerName, List<Message> messages, String? partnerAvatarUrl
+ String conversationId, String partnerId, String partnerName, List<Message> messages, String? partnerAvatarUrl
 });
 
 
@@ -62,9 +62,10 @@ class _$ChatMessageCopyWithImpl<$Res>
 
 /// Create a copy of ChatMessage
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? conversationId = null,Object? partnerName = null,Object? messages = null,Object? partnerAvatarUrl = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? conversationId = null,Object? partnerId = null,Object? partnerName = null,Object? messages = null,Object? partnerAvatarUrl = freezed,}) {
   return _then(_self.copyWith(
 conversationId: null == conversationId ? _self.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
+as String,partnerId: null == partnerId ? _self.partnerId : partnerId // ignore: cast_nullable_to_non_nullable
 as String,partnerName: null == partnerName ? _self.partnerName : partnerName // ignore: cast_nullable_to_non_nullable
 as String,messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
 as List<Message>,partnerAvatarUrl: freezed == partnerAvatarUrl ? _self.partnerAvatarUrl : partnerAvatarUrl // ignore: cast_nullable_to_non_nullable
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String conversationId,  String partnerName,  List<Message> messages,  String? partnerAvatarUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String conversationId,  String partnerId,  String partnerName,  List<Message> messages,  String? partnerAvatarUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ChatMessage() when $default != null:
-return $default(_that.conversationId,_that.partnerName,_that.messages,_that.partnerAvatarUrl);case _:
+return $default(_that.conversationId,_that.partnerId,_that.partnerName,_that.messages,_that.partnerAvatarUrl);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.conversationId,_that.partnerName,_that.messages,_that.part
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String conversationId,  String partnerName,  List<Message> messages,  String? partnerAvatarUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String conversationId,  String partnerId,  String partnerName,  List<Message> messages,  String? partnerAvatarUrl)  $default,) {final _that = this;
 switch (_that) {
 case _ChatMessage():
-return $default(_that.conversationId,_that.partnerName,_that.messages,_that.partnerAvatarUrl);case _:
+return $default(_that.conversationId,_that.partnerId,_that.partnerName,_that.messages,_that.partnerAvatarUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return $default(_that.conversationId,_that.partnerName,_that.messages,_that.part
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String conversationId,  String partnerName,  List<Message> messages,  String? partnerAvatarUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String conversationId,  String partnerId,  String partnerName,  List<Message> messages,  String? partnerAvatarUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _ChatMessage() when $default != null:
-return $default(_that.conversationId,_that.partnerName,_that.messages,_that.partnerAvatarUrl);case _:
+return $default(_that.conversationId,_that.partnerId,_that.partnerName,_that.messages,_that.partnerAvatarUrl);case _:
   return null;
 
 }
@@ -209,10 +210,11 @@ return $default(_that.conversationId,_that.partnerName,_that.messages,_that.part
 
 
 class _ChatMessage implements ChatMessage {
-  const _ChatMessage({required this.conversationId, required this.partnerName, required final  List<Message> messages, this.partnerAvatarUrl}): _messages = messages;
+  const _ChatMessage({required this.conversationId, required this.partnerId, required this.partnerName, required final  List<Message> messages, this.partnerAvatarUrl}): _messages = messages;
   
 
 @override final  String conversationId;
+@override final  String partnerId;
 @override final  String partnerName;
  final  List<Message> _messages;
 @override List<Message> get messages {
@@ -233,16 +235,16 @@ _$ChatMessageCopyWith<_ChatMessage> get copyWith => __$ChatMessageCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatMessage&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.partnerName, partnerName) || other.partnerName == partnerName)&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.partnerAvatarUrl, partnerAvatarUrl) || other.partnerAvatarUrl == partnerAvatarUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatMessage&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.partnerId, partnerId) || other.partnerId == partnerId)&&(identical(other.partnerName, partnerName) || other.partnerName == partnerName)&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.partnerAvatarUrl, partnerAvatarUrl) || other.partnerAvatarUrl == partnerAvatarUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,conversationId,partnerName,const DeepCollectionEquality().hash(_messages),partnerAvatarUrl);
+int get hashCode => Object.hash(runtimeType,conversationId,partnerId,partnerName,const DeepCollectionEquality().hash(_messages),partnerAvatarUrl);
 
 @override
 String toString() {
-  return 'ChatMessage(conversationId: $conversationId, partnerName: $partnerName, messages: $messages, partnerAvatarUrl: $partnerAvatarUrl)';
+  return 'ChatMessage(conversationId: $conversationId, partnerId: $partnerId, partnerName: $partnerName, messages: $messages, partnerAvatarUrl: $partnerAvatarUrl)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$ChatMessageCopyWith<$Res> implements $ChatMessageCopyWith
   factory _$ChatMessageCopyWith(_ChatMessage value, $Res Function(_ChatMessage) _then) = __$ChatMessageCopyWithImpl;
 @override @useResult
 $Res call({
- String conversationId, String partnerName, List<Message> messages, String? partnerAvatarUrl
+ String conversationId, String partnerId, String partnerName, List<Message> messages, String? partnerAvatarUrl
 });
 
 
@@ -270,9 +272,10 @@ class __$ChatMessageCopyWithImpl<$Res>
 
 /// Create a copy of ChatMessage
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? conversationId = null,Object? partnerName = null,Object? messages = null,Object? partnerAvatarUrl = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? conversationId = null,Object? partnerId = null,Object? partnerName = null,Object? messages = null,Object? partnerAvatarUrl = freezed,}) {
   return _then(_ChatMessage(
 conversationId: null == conversationId ? _self.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
+as String,partnerId: null == partnerId ? _self.partnerId : partnerId // ignore: cast_nullable_to_non_nullable
 as String,partnerName: null == partnerName ? _self.partnerName : partnerName // ignore: cast_nullable_to_non_nullable
 as String,messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
 as List<Message>,partnerAvatarUrl: freezed == partnerAvatarUrl ? _self.partnerAvatarUrl : partnerAvatarUrl // ignore: cast_nullable_to_non_nullable

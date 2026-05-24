@@ -20,4 +20,17 @@ class FirebaseTypingRemoteDataSource implements TypingRemoteDataSource {
       await ref.remove();
     }
   }
+
+  @override
+  Stream<bool> watchPartnerTypingStatus({
+    required String conversationId,
+    required String partnerId,
+  }) {
+    return _database
+        .ref('typing/$conversationId/$partnerId')
+        .onValue
+        .map(
+          (event) => event.snapshot.value == true,
+        );
+  }
 }

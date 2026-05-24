@@ -10,10 +10,12 @@ import 'package:riverpod_chat/src/theme/app_theme.dart';
 class MessageInputBar extends HookConsumerWidget {
   const MessageInputBar({
     required this.conversationId,
+    required this.partnerId,
     super.key,
   });
 
   final String conversationId;
+  final String partnerId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,9 +30,12 @@ class MessageInputBar extends HookConsumerWidget {
       unawaited(
         ref
             .read(
-              typingStatusProvider(conversationId: conversationId).notifier,
+              typingStatusProvider(
+                conversationId: conversationId,
+                partnerId: partnerId,
+              ).notifier,
             )
-            .update(isTyping: textValue.trim().isNotEmpty),
+            .updateIsTyping(isTyping: textValue.trim().isNotEmpty),
       );
       return null;
     }, [textValue]);

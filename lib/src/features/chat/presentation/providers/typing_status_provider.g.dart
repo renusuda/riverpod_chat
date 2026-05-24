@@ -12,10 +12,11 @@ part of 'typing_status_provider.dart';
 @ProviderFor(TypingStatus)
 final typingStatusProvider = TypingStatusFamily._();
 
-final class TypingStatusProvider extends $NotifierProvider<TypingStatus, void> {
+final class TypingStatusProvider
+    extends $StreamNotifierProvider<TypingStatus, bool> {
   TypingStatusProvider._({
     required TypingStatusFamily super.from,
-    required String super.argument,
+    required ({String conversationId, String partnerId}) super.argument,
   }) : super(
          retry: null,
          name: r'typingStatusProvider',
@@ -31,20 +32,12 @@ final class TypingStatusProvider extends $NotifierProvider<TypingStatus, void> {
   String toString() {
     return r'typingStatusProvider'
         ''
-        '($argument)';
+        '$argument';
   }
 
   @$internal
   @override
   TypingStatus create() => TypingStatus();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(void value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<void>(value),
-    );
-  }
 
   @override
   bool operator ==(Object other) {
@@ -57,10 +50,17 @@ final class TypingStatusProvider extends $NotifierProvider<TypingStatus, void> {
   }
 }
 
-String _$typingStatusHash() => r'b7498f5f874061b2730fcb0865eb4f20e9e7e23f';
+String _$typingStatusHash() => r'9d747d35965e7fa83074fb2070bef4c87ca8ed5f';
 
 final class TypingStatusFamily extends $Family
-    with $ClassFamilyOverride<TypingStatus, void, void, void, String> {
+    with
+        $ClassFamilyOverride<
+          TypingStatus,
+          AsyncValue<bool>,
+          bool,
+          Stream<bool>,
+          ({String conversationId, String partnerId})
+        > {
   TypingStatusFamily._()
     : super(
         retry: null,
@@ -70,30 +70,45 @@ final class TypingStatusFamily extends $Family
         isAutoDispose: true,
       );
 
-  TypingStatusProvider call({required String conversationId}) =>
-      TypingStatusProvider._(argument: conversationId, from: this);
+  TypingStatusProvider call({
+    required String conversationId,
+    required String partnerId,
+  }) => TypingStatusProvider._(
+    argument: (conversationId: conversationId, partnerId: partnerId),
+    from: this,
+  );
 
   @override
   String toString() => r'typingStatusProvider';
 }
 
-abstract class _$TypingStatus extends $Notifier<void> {
-  late final _$args = ref.$arg as String;
-  String get conversationId => _$args;
+abstract class _$TypingStatus extends $StreamNotifier<bool> {
+  late final _$args = ref.$arg as ({String conversationId, String partnerId});
+  String get conversationId => _$args.conversationId;
+  String get partnerId => _$args.partnerId;
 
-  void build({required String conversationId});
+  Stream<bool> build({
+    required String conversationId,
+    required String partnerId,
+  });
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<void, void>;
+    final ref = this.ref as $Ref<AsyncValue<bool>, bool>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<void, void>,
-              void,
+              AnyNotifier<AsyncValue<bool>, bool>,
+              AsyncValue<bool>,
               Object?,
               Object?
             >;
-    element.handleCreate(ref, () => build(conversationId: _$args));
+    element.handleCreate(
+      ref,
+      () => build(
+        conversationId: _$args.conversationId,
+        partnerId: _$args.partnerId,
+      ),
+    );
   }
 }
