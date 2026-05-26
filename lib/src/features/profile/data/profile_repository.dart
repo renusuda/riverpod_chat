@@ -10,4 +10,10 @@ class ProfileRepository {
   Future<UserProfile> fetchProfile({required String uid}) {
     return _remoteDataSource.fetchProfile(uid: uid);
   }
+
+  Future<void> saveFcmToken({required String uid, required String token}) =>
+      _remoteDataSource.saveFcmToken(uid: uid, token: token);
+
+  Future<void> deleteFcmToken({required String uid}) =>
+      _remoteDataSource.deleteFcmToken(uid: uid);
 }

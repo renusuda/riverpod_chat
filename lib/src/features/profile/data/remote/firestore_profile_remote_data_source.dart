@@ -18,4 +18,14 @@ class FirestoreProfileRemoteDataSource implements ProfileRemoteDataSource {
     final dto = UserProfileDto.fromJson(data);
     return dto.toDomain();
   }
+
+  @override
+  Future<void> saveFcmToken({required String uid, required String token}) =>
+      _firestore.collection('users').doc(uid).update({'fcmToken': token});
+
+  @override
+  Future<void> deleteFcmToken({required String uid}) => _firestore
+      .collection('users')
+      .doc(uid)
+      .update({'fcmToken': FieldValue.delete()});
 }

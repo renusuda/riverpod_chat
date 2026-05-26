@@ -8,8 +8,11 @@ import 'package:riverpod_chat/src/features/auth/data/auth_repository_provider.da
 import 'package:riverpod_chat/src/features/auth/data/remote/auth_remote_data_source.dart';
 import 'package:riverpod_chat/src/features/auth/domain/app_user.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/pages/login_page.dart';
+import 'package:riverpod_chat/src/features/notifications/use_case/delete_fcm_token_use_case.dart';
+import 'package:riverpod_chat/src/features/notifications/use_case/delete_fcm_token_use_case_provider.dart';
+import 'package:riverpod_chat/src/features/profile/data/profile_repository_provider.dart';
+import 'package:riverpod_chat/src/features/profile/data/remote/profile_remote_data_source.dart';
 import 'package:riverpod_chat/src/features/profile/domain/user_profile.dart';
-import 'package:riverpod_chat/src/features/profile/presentation/providers/my_profile_provider.dart';
 
 import '../../../../../helpers/widget_tester_extension.dart';
 
@@ -46,21 +49,28 @@ Future<void> _pumpApp(
   WidgetTester tester, {
   required FakeAuthRemoteDataSource remoteDataSource,
 }) {
+  final profileRemoteDataSource = FakeProfileRemoteDataSource();
   return tester.pumpWidget(
     ProviderScope(
       overrides: [
         authRemoteDataSourceProvider.overrideWithValue(remoteDataSource),
-        myProfileProvider.overrideWith(
-          (ref) async => const UserProfile(
-            displayName: 'テストユーザー',
-            username: 'testuser',
-            avatarUrl: 'https://example.com/avatar.jpg',
-          ),
+        profileRemoteDataSourceProvider.overrideWithValue(
+          profileRemoteDataSource,
+        ),
+        deleteFcmTokenUseCaseProvider.overrideWithValue(
+          const FakeDeleteFcmTokenUseCase(),
         ),
       ],
       child: const App(),
     ),
   );
+}
+
+class FakeDeleteFcmTokenUseCase implements DeleteFcmTokenUseCase {
+  const FakeDeleteFcmTokenUseCase();
+
+  @override
+  Future<void> execute() async {}
 }
 
 class FakeAuthRemoteDataSource implements AuthRemoteDataSource {
@@ -84,4 +94,24 @@ class FakeAuthRemoteDataSource implements AuthRemoteDataSource {
 
   @override
   Stream<AppUser?> authStateChanges() => _authStateController.stream;
+}
+
+class FakeProfileRemoteDataSource implements ProfileRemoteDataSource {
+  @override
+  Future<UserProfile> fetchProfile({required String uid}) async {
+    return const UserProfile(
+      displayName: 'テストユーザー',
+      username: 'testuser',
+      avatarUrl: 'https://example.com/avatar.jpg',
+    );
+  }
+
+  @override
+  Future<void> saveFcmToken({
+    required String uid,
+    required String token,
+  }) async {}
+
+  @override
+  Future<void> deleteFcmToken({required String uid}) async {}
 }

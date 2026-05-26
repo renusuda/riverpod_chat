@@ -32,7 +32,7 @@ final class ProfileProvider extends $AsyncNotifierProvider<Profile, void> {
   Profile create() => Profile();
 }
 
-String _$profileHash() => r'c6760ad611485e984a34e8a3f9187111ca2b127e';
+String _$profileHash() => r'93adc81e43d273513712ce010073727a9e5983f3';
 
 abstract class _$Profile extends $AsyncNotifier<void> {
   FutureOr<void> build();

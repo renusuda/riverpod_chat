@@ -50,7 +50,7 @@ final class TypingStatusProvider
   }
 }
 
-String _$typingStatusHash() => r'9d747d35965e7fa83074fb2070bef4c87ca8ed5f';
+String _$typingStatusHash() => r'33bc5e5b88956210fef6e0ab8001d886901af412';
 
 final class TypingStatusFamily extends $Family
     with
