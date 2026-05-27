@@ -10,6 +10,9 @@ import 'package:riverpod_chat/src/features/auth/data/remote/auth_remote_data_sou
 import 'package:riverpod_chat/src/features/auth/domain/app_user.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/pages/login_page.dart';
 import 'package:riverpod_chat/src/features/chat/presentation/pages/conversations_page.dart';
+import 'package:riverpod_chat/src/features/notifications/use_case/save_fcm_token_use_case.dart';
+import 'package:riverpod_chat/src/features/notifications/use_case/save_fcm_token_use_case_provider.dart';
+import 'package:riverpod_chat/src/features/notifications/use_case/watch_fcm_token_refresh_use_case_provider.dart';
 
 import '../../../../../helpers/widget_tester_extension.dart';
 
@@ -78,10 +81,21 @@ Future<void> _pumpApp(
     ProviderScope(
       overrides: [
         authRemoteDataSourceProvider.overrideWithValue(remoteDataSource),
+        fcmTokenRefreshStreamProvider.overrideWithValue(const Stream.empty()),
+        saveFcmTokenUseCaseProvider.overrideWithValue(
+          const FakeSaveFcmTokenUseCase(),
+        ),
       ],
       child: const App(),
     ),
   );
+}
+
+class FakeSaveFcmTokenUseCase implements SaveFcmTokenUseCase {
+  const FakeSaveFcmTokenUseCase();
+
+  @override
+  Future<void> execute() async {}
 }
 
 Future<void> _enterEmail(WidgetTester tester, String email) {

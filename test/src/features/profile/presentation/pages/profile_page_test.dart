@@ -10,6 +10,7 @@ import 'package:riverpod_chat/src/features/auth/domain/app_user.dart';
 import 'package:riverpod_chat/src/features/auth/presentation/pages/login_page.dart';
 import 'package:riverpod_chat/src/features/notifications/use_case/delete_fcm_token_use_case.dart';
 import 'package:riverpod_chat/src/features/notifications/use_case/delete_fcm_token_use_case_provider.dart';
+import 'package:riverpod_chat/src/features/notifications/use_case/watch_fcm_token_refresh_use_case_provider.dart';
 import 'package:riverpod_chat/src/features/profile/data/profile_repository_provider.dart';
 import 'package:riverpod_chat/src/features/profile/data/remote/profile_remote_data_source.dart';
 import 'package:riverpod_chat/src/features/profile/domain/user_profile.dart';
@@ -60,6 +61,7 @@ Future<void> _pumpApp(
         deleteFcmTokenUseCaseProvider.overrideWithValue(
           const FakeDeleteFcmTokenUseCase(),
         ),
+        fcmTokenRefreshStreamProvider.overrideWithValue(const Stream.empty()),
       ],
       child: const App(),
     ),

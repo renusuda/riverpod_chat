@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_chat/src/features/notifications/use_case/watch_fcm_token_refresh_use_case_provider.dart';
 import 'package:riverpod_chat/src/routing/app_router.dart';
 import 'package:riverpod_chat/src/theme/app_spacing.dart';
 
@@ -8,6 +9,7 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(fcmTokenRefreshListenerProvider);
     final goRouter = ref.watch(goRouterProvider);
     return MaterialApp.router(
       routerConfig: goRouter,
